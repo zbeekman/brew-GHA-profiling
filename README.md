@@ -14,28 +14,28 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 
  --- :| ---
-HOMEBREW_VERSION :| 2.2.4
-ORIGIN :| https://github.com/Homebrew/brew
-HEAD :| d014d5a982bc3712179af59faae33fe777d49aef
-Last commit :| 2 weeks ago
-Core tap ORIGIN :| https://github.com/Homebrew/homebrew-core
-Core tap HEAD :| a3f99229e70c970a9c3e8c1d92f477c561e06cda
-Core tap last commit :| 2 weeks ago
-HOMEBREW_PREFIX :| /usr/local
-HOMEBREW_NO_ANALYTICS_THIS_RUN :| 1
-HOMEBREW_NO_AUTO_UPDATE :| 1
-CPU :| quad-core 64-bit ivybridge
-Homebrew Ruby :| 2.6.3 => /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby
-Clang :| 11.0 build 1100
-Git :| 2.25.0 => /usr/local/bin/git
-Curl :| 7.64.1 => /usr/bin/curl
-Java :| 13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.9, 1.7.0_252-zulu-7.36.0.5
-macOS :| 10.15.2-x86_64
-CLT :| 11.3.1.0.1.1576735732
-Xcode :| 11.2.1 => /Applications/Xcode_11.2.1.app/Contents/Developer
- HOMEBREW_REPO :| /usr/local/Homebrew
- HOMEBREW_CELLAR :| /usr/local/Cellar
- HOMEBREW_CACHE :| /Users/runner/Library/Caches/Homebrew
+HOMEBREW_VERSION | 2.2.4
+ORIGIN | https://github.com/Homebrew/brew
+HEAD | d014d5a982bc3712179af59faae33fe777d49aef
+Last commit | 2 weeks ago
+Core tap ORIGIN | https://github.com/Homebrew/homebrew-core
+Core tap HEAD | a3f99229e70c970a9c3e8c1d92f477c561e06cda
+Core tap last commit | 2 weeks ago
+HOMEBREW_PREFIX | /usr/local
+HOMEBREW_NO_ANALYTICS_THIS_RUN | 1
+HOMEBREW_NO_AUTO_UPDATE | 1
+CPU | quad-core 64-bit ivybridge
+Homebrew Ruby | 2.6.3 => /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby
+Clang | 11.0 build 1100
+Git | 2.25.0 => /usr/local/bin/git
+Curl | 7.64.1 => /usr/bin/curl
+Java | 13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.9, 1.7.0_252-zulu-7.36.0.5
+macOS | 10.15.2-x86_64
+CLT | 11.3.1.0.1.1576735732
+Xcode | 11.2.1 => /Applications/Xcode_11.2.1.app/Contents/Developer
+ HOMEBREW_REPO | /usr/local/Homebrew
+ HOMEBREW_CELLAR | /usr/local/Cellar
+ HOMEBREW_CACHE | /Users/runner/Library/Caches/Homebrew
 
 #### `brew doctor`
 
@@ -48,7 +48,7 @@ Xcode :| 11.2.1 => /Applications/Xcode_11.2.1.app/Contents/Developer
 
 
  --- :| ---
-HOMEBREW_NO_AUTO_UPDATE :| 1
+HOMEBREW_NO_AUTO_UPDATE | 1
 
 #### Variables brew sets during install from source
 
