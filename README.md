@@ -5,3 +5,159 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 ### Homebrew defaults on GitHub Actions
 
+
+### General configuration information
+
+59 kegs, 99,100 files, 1.5GB
+
+#### `brew config`
+
+
+ --- :| ---
+HOMEBREW_VERSION :| 2.2.4
+ORIGIN :| https://github.com/Homebrew/brew
+HEAD :| d014d5a982bc3712179af59faae33fe777d49aef
+Last commit :| 2 weeks ago
+Core tap ORIGIN :| https://github.com/Homebrew/homebrew-core
+Core tap HEAD :| a3f99229e70c970a9c3e8c1d92f477c561e06cda
+Core tap last commit :| 2 weeks ago
+HOMEBREW_PREFIX :| /usr/local
+HOMEBREW_NO_ANALYTICS_THIS_RUN :| 1
+HOMEBREW_NO_AUTO_UPDATE :| 1
+CPU :| quad-core 64-bit ivybridge
+Homebrew Ruby :| 2.6.3 => /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby
+Clang :| 11.0 build 1100
+Git :| 2.25.0 => /usr/local/bin/git
+Curl :| 7.64.1 => /usr/bin/curl
+Java :| 13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.9, 1.7.0_252-zulu-7.36.0.5
+macOS :| 10.15.2-x86_64
+CLT :| 11.3.1.0.1.1576735732
+Xcode :| 11.2.1 => /Applications/Xcode_11.2.1.app/Contents/Developer
+ HOMEBREW_REPO :| /usr/local/Homebrew
+ HOMEBREW_CELLAR :| /usr/local/Cellar
+ HOMEBREW_CACHE :| /Users/runner/Library/Caches/Homebrew
+
+#### `brew doctor`
+
+
+```
+```
+
+
+#### Variables set in environment
+
+
+ --- :| ---
+HOMEBREW_NO_AUTO_UPDATE :| 1
+
+#### Variables brew sets during install from source
+
+
+ --- :| ---
+export CC="clang"
+export CXX="clang\+\+"
+export OBJC="clang"
+export OBJCXX="clang\+\+"
+export HOMEBREW_CC="clang"
+export HOMEBREW_CXX="clang\+\+"
+export MAKEFLAGS="-j4"
+export CMAKE_PREFIX_PATH="/usr/local"
+export CMAKE_INCLUDE_PATH="/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/libxml2:/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Headers"
+export CMAKE_LIBRARY_PATH="/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries"
+export PKG_CONFIG_LIBDIR="/usr/lib/pkgconfig:/usr/local/Homebrew/Library/Homebrew/os/mac/pkgconfig/10.15"
+export HOMEBREW_GIT="git"
+export HOMEBREW_SDKROOT="/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk"
+export ACLOCAL_PATH="/usr/local/share/aclocal"
+export PATH="/usr/local/Homebrew/Library/Homebrew/shims/mac/super:/usr/bin:/bin:/usr/sbin:/sbin"
+
+### Installed taps
+
+
+```
+homebrew/cask: unpinned, 1 command, 3512 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,629 files, 3.9MB)
+From: https://github.com/Homebrew/homebrew-cask
+
+homebrew/cask-versions: unpinned, 160 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (208 files, 325.8KB)
+From: https://github.com/Homebrew/homebrew-cask-versions
+
+homebrew/core: unpinned, 2 commands, 4887 formulae
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,146 files, 12.8MB)
+From: https://github.com/Homebrew/homebrew-core
+```
+
+
+### Installed packages
+
+
+#### homebrew-core
+
+
+  * adns 1.5.1
+  * apr 1.7.0
+  * apr-util 1.6.1_3
+  * aria2 1.35.0
+  * azure-cli 2.0.80
+  * bats 0.4.0
+  * carthage 0.34.0
+  * cmake 3.16.2
+  * curl 7.68.0
+  * gdbm 1.18.1
+  * gettext 0.20.1
+  * git 2.25.0
+  * git-lfs 2.9.2
+  * gmp 6.1.2_2
+  * gnupg 2.2.19
+  * gnutls 3.6.11.1
+  * go 1.13.6
+  * gradle 6.1
+  * icu4c 64.2
+  * jq 1.6
+  * libassuan 2.5.3
+  * libevent 2.1.11_1
+  * libffi 3.2.1
+  * libgcrypt 1.8.5
+  * libgpg-error 1.36
+  * libidn2 2.3.0
+  * libksba 1.3.5
+  * libssh2 1.9.0_1
+  * libtasn1 4.15.0
+  * libunistring 0.9.10
+  * libusb 1.0.23
+  * libyaml 0.2.2
+  * lz4 1.9.2
+  * maven 3.6.3
+  * nettle 3.4.1
+  * node@12 12.14.1_1
+  * npth 1.6
+  * oniguruma 6.9.4
+  * openssl 1.0.2t
+  * openssl@1.1 1.1.1d
+  * p11-kit 0.23.18.1
+  * parallel 20191222
+  * pcre2 10.34
+  * perl 5.30.1
+  * pinentry 1.1.0_1
+  * python 3.7.6_1
+  * python@2 2.7.17_1
+  * python@3.8 3.8.1
+  * readline 8.0.1
+  * ruby 2.6.5
+  * rustup-init 1.21.1
+  * selenium-server-standalone 3.141.59
+  * sqlite 3.30.1
+  * subversion 1.13.0_1
+  * unbound 1.9.6
+  * utf8proc 2.4.0
+  * wget 1.20.3_2
+  * xctool 0.3.7
+  * xz 5.2.4
+
+#### homebrew-cask
+
+
+  * chromedriver 79.0.3945.36
+  * fastlane latest
+  * google-chrome 79.0.3945.130
+  * powershell 6.2.3
