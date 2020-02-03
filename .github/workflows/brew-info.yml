@@ -24,71 +24,58 @@ jobs:
       - name: Get brew configuration
         shell: bash
         run: |
-          export nl='echo "" >> gh-pages/README.md' #          export code='echo "\`\`\`" >> gh-pages/README.md'
-          export twocol='echo " --- :| ---" >> gh-pages/README.md'
+          alias code="printf '\n```\n' >> gh-pages/README.md"
+          alias twocol="printf '\n --- :| ---\n' >> gh-pages/README.md"
+          alias h3="printf '\n### %s\n\n' >> gh-pages/README.md"
+          alias h4="printf '\n#### %s\n\n' >> gh-pages/README.md"
+          type -a code
+          type -a twocol
+          type -a h3
           mount
           df -h
           env | grep -E -i 'te?mp' || true
           env | grep -i 'scratch' || true
           env | grep -i brew || true
-          $nl
-          echo "### General configuration information" >> $DOC
-          $nl
+          h3 'General configuration information'
           time brew info || true
           brew info 2>&1 >> $DOC || true
-          $nl
-          echo "#### 'brew config'" >> $DOC
-          $nl
+          h4 '`brew config`' >> $DOC
           time brew config
-          $twocol
+          twocol
           brew config 2>&1 | sed 's/: / :| /' >> $DOC
           brew --repo 2>&1 | sed 's/^/ HOMEBREW_REPO :| /' >> $DOC
           brew --cellar 2>&1 | sed 's/^/ HOMEBREW_CELLAR :| /' >> $DOC
           brew --cache 2>&1 | sed 's/^/ HOMEBREW_CACHE :| /' >> $DOC
-          $nl
-          echo "#### 'brew doctor'" >> $DOC
-          $nl
-          $code
+          h4 '`brew doctor`'
+          code
           time brew doctor || true
           brew doctor 2>&1 | sed '1,4d' >> $DOC || true
-          $code
-          $nl
-          echo "#### Variables set in environment"
-          $nl
-          $twocol
+          code
+          h4 'Variables set in environment'
+          twocol
           env | grep BREW | sed 's/=/ :| /' >> $DOC || true
-          $nl
-          echo "#### Variables brew sets during install from source"
-          $nl
-          $twocol
+          h4 'Variables brew sets during install from source'
+          twocol
           brew --env 2>&1 | sed 's/: / :|/' >> $DOC
-          $nl
-          echo "### Installed taps" >> $DOC
+          h3 'Installed taps'
           time brew tap-info --installed | tee tap-info.txt || true
-          $nl
-          $code
+          code
           cat tap-info.txt >> $DOC
-          $code
-          $nl
-          echo "### Installed packages" >> $DOC
-          $nl
-          echo "#### homebrew-core" >> $DOC
-          $nl
+          code
+          h3 'Installed packages'
+          h4 'homebrew-core'
           time brew list --versions
           brew list --versions 2>&1 | sed 's/^/  * /' >> $DOC
-          $nl
-          echo "#### homebrew-cask" >> $DOC
-          $nl
+          h4 'homebrew-cask'
           time brew cask list --versions || true
           brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC || true
-          $nl
       - name: Dump on error
         if: always()
         run: cat gh-pages/README.md
       - name: Dump bundle
         run: |
           brew tap homebrew/bundle || true
-          brew bundle dump --force --describe GHA-default-Brewfile.txt || true
+          brew bundle dump --force --describe --file=GHA-default-Brewfile.txt || true
       - name: Upload Brefile
         uses: actions/upload-artifact@v1
         with:
