@@ -41,7 +41,7 @@ jobs:
       - name: Time-it
         shell: bash
         run: |
-          pkg_version="$(brew --info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
           pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
           time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee brew-install-${PKG}.log)))
           printf ',\n%s, %s, %s, %s, %s' "$PKG" "$pkg_version" "${time[1]}" "$(date)" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
