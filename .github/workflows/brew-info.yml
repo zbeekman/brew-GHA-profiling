@@ -83,7 +83,7 @@ jobs:
           brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC
           nl
       - name: Dump bundle
-        runs: |
+        run: |
           brew tap homebrew/bundle
           brew bundle dump --force --describe GHA-default-Brewfile.txt
       - name: Upload Brefile
