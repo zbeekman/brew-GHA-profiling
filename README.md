@@ -5,9 +5,12 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 ### Homebrew defaults on GitHub Actions
 
-__date:__ Mon Feb  3 20:57:42 UTC 2020
-__commit:__ bdab54bac26fe90ed96f8d52c3300574cece9891
-__branch:__ /master
+
+| key | value |
+| ---: | --- |
+| __date__  | Mon Feb  3 21:04:37 UTC 2020 |
+| __commit__ | 84b123fc2dffc79144d1f291df79aed3aa31c52a |
+| __branch__ | /master |
 
 ### General configuration information
 
@@ -15,6 +18,8 @@ __branch:__ /master
 
 #### `brew config`
 
+
+| key | value |
 | ---: | --- |
 | HOMEBREW_VERSION | 2.2.4 |
 | ORIGIN | https://github.com/Homebrew/brew |
@@ -48,11 +53,15 @@ __branch:__ /master
 
 #### Variables set in environment
 
+
+| key | value |
 | ---: | --- |
 HOMEBREW_NO_AUTO_UPDATE | 1
 
 #### Variables brew sets during install from source
 
+
+| key | value |
 | ---: | --- |
 | CC | "clang" |
 | CXX | "clang\+\+" |
