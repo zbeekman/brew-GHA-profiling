@@ -1,13 +1,22 @@
 name: Brew Info
 
-on: [push]
+on:
+  push:
+    branches: master
+  schedule:
+    cron: '37 6 * * 0' # Sunday mornings at 6:37 AM UTC (just before midnight Saturday eastern)
 
 env:
+  CONFIG: "Default"
+  DATA_DIR: "gh-pages/data"
+  PACKAGES: "open-mpi gcc@8 graphviz"
+  DOC: "gh-pages/README.md"
   TZ: "UTC"
   NCPU: "2"
   CI: "ON"
-#  HOMEBREW_DEVELOPER: "ON"
-  DOC: "gh-pages/README.md"
+  HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+  HOMEBREW_DEVELOPER: "ON"
+
 
 jobs:
 
@@ -24,6 +33,7 @@ jobs:
       - name: Get brew configuration
         shell: bash
         run: |
+          [[ ${{ github.event_name }} = *schedule* ]] && sleep $(( RANDOM % 120 )) || true
           . .github/workflows/helper-fns.sh
           type -a code
           type -a twocol
@@ -92,3 +102,45 @@ jobs:
             git commit -m "Auto update from GH Actions"
             git push origin gh-pages
           fi
+
+  Profile:
+    needs: Get-brew-info
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Setup
+        run: |
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          mkdir logs || true
+      - name: Time-it
+        shell: bash
+        run: |
+          for PKG in ${PACKAGES} ; do
+            if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
+              printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}.csv
+            fi
+            pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+            pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+            time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+            printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
+          done
+      - name: Upload log on failure
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          path: logs
+          name: brew-install-logs
+      - name: Publish data
+        run: |
+          cd gh-pages
+          git status || true
+          git diff
+          git add data/*.csv
+          git commit -m "Adding timing data for $PACKAGES [$CONFIG]"
+          git push origin gh-pages
