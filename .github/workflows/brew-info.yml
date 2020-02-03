@@ -1,0 +1,93 @@
+name: Brew Info
+
+on: [push]
+
+env:
+  TZ: "UTC"
+  NCPU: "2"
+  CI: "ON"
+#  HOMEBREW_DEVELOPER: "ON"
+  DOC: "gh-pages/README.md"
+
+jobs:
+
+  Get-brew-info:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Get brew configuration
+        run: |
+          alias nl='echo "" >> gh-pages/README.md'
+          alias code='echo "\`\`\`" >> gh-pages/README.md'
+          alias twocol='echo " --- :| ---" >> gh-pages/README.md'
+          mount
+          df -h
+          env | grep -E -i 'TE?MP'
+          env | grep -i 'SCRATCH'
+          env | grep -i brew
+          nl
+          echo "### General configuration information" >> $DOC
+          nl
+          time brew info
+          brew info >> $DOC
+          nl
+          echo "#### 'brew config'" >> $DOC
+          nl
+          time brew config
+          twocol
+          brew config 2>&1 | sed 's/: / :| /' >> $DOC
+          brew --repo 2>&1 | sed 's/^/ HOMEBREW_REPO :| /' >> $DOC
+          brew --cellar 2>&1 | sed 's/^/ HOMEBREW_CELLAR :| /' >> $DOC
+          brew --cache 2>&1 | sed 's/^/ HOMEBREW_CACHE :| /' >> $DOC
+          nl
+          echo "#### 'brew doctor'" >> $DOC
+          nl
+          code
+          time brew doctor
+          brew doctor 2>&1 | sed '1,4d' >> $DOC
+          code
+          nl
+          echo "#### Variables set in environment"
+          nl
+          twocol
+          env | grep BREW | sed 's/=/ :| /' >> $DOC
+          nl
+          echo "#### Variables brew sets during install from source"
+          nl
+          twocol
+          brew --env 2>&1 | sed 's/: / :|/' >> $DOC
+          nl
+          echo "### Installed taps" >> $DOC
+          time brew tap-info --installed | tee tap-info.txt
+          nl
+          code
+          cat tap-info.txt >> $DOC
+          code
+          nl
+          echo "### Installed packages" >> $DOC
+          nl
+          echo "#### homebrew-core" >> $DOC
+          nl
+          time brew list --versions
+          brew list --versions 2>&1 | sed 's/^/  * /' >> $DOC
+          nl
+          echo "#### homebrew-cask" >> $DOC
+          nl
+          time brew cask list --versions
+          brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC
+          nl
+      - name: Dump bundle
+        runs: |
+          brew tap homebrew/bundle
+          brew bundle dump --force --describe GHA-default-Brewfile.txt
+      - name: Upload Brefile
+        uses: actions/upload-artifact@v1
+        with:
+          name: GHA-Brewfile
+          path: ./GHA-default-Brewfile.txt
