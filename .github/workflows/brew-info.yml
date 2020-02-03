@@ -34,8 +34,8 @@ jobs:
           nl
           echo "### General configuration information" >> $DOC
           nl
-          time brew info
-          brew info >> $DOC
+          time brew info || true
+          brew info 2>&1 >> $DOC || true
           nl
           echo "#### 'brew config'" >> $DOC
           nl
