@@ -71,6 +71,11 @@ jobs:
         run: |
           brew tap homebrew/bundle || true
           brew bundle dump --force --describe --file=GHA-default-Brewfile.txt || true
+          if [ -f GHA-default-Brewfile.txt ]; then
+            . .github/workflows/helper-fns.sh
+            h 3 "Brewfile summarizing all available software"
+            code < GHA-default-Brewfile.txt
+          fi
       - name: Upload Brewfile
         uses: actions/upload-artifact@v1
         with:
