@@ -8,8 +8,8 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 | key | value |
 | ---: | --- |
-| __date__  | Mon Feb  3 21:26:50 UTC 2020 |
-| __commit__ | 5330f6820b9ef34ee3ad4d0eaa4a44584fff3b43 |
+| __date__  | Mon Feb  3 21:36:38 UTC 2020 |
+| __commit__ | e804466bffca3b5c0376026d255b03af9c6012d5 |
 | __branch__ | master |
 | __repo__ | https://github.com/zbeekman/brew-GHA-profiling |
 
@@ -275,5 +275,70 @@ Enabled
 LC_ALL="en_US.UTF-8"
 PATH="/usr/local/Homebrew/Library/Homebrew/shims/scm:/usr/bin:/bin:/usr/sbin:/sbin"
 SHELL="/bin/bash"
+```
+
+
+### Brewfile summarizing all available software
+
+
+```
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
+# Download with resuming and segmented downloading
+brew "aria2"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
+# TAP-compliant test framework for Bash scripts
+brew "bats"
+# Decentralized dependency manager for Cocoa
+brew "carthage"
+# Cross-platform make
+brew "cmake"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Distributed revision control system
+brew "git"
+# Git extension for versioning large files
+brew "git-lfs"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Mac App Store command-line interface
+brew "mas"
+# Java-based project management
+brew "maven"
+# Platform built on V8 to build network applications
+brew "node@12", link: true
+# Shell command parallelization utility
+brew "parallel"
+# Interpreted, interactive, object-oriented programming language
+brew "python"
+# Interpreted, interactive, object-oriented programming language
+brew "python@2"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
+# The Rust toolchain installer
+brew "rustup-init"
+# Browser automation for testing purposes
+brew "selenium-server-standalone"
+# Version control system designed to be a better CVS
+brew "subversion"
+# Internet file retriever
+brew "wget"
+# Drop-in replacement for xcodebuild with a few extra features
+brew "xctool"
+cask "chromedriver"
+cask "fastlane"
+cask "google-chrome"
+cask "powershell"
 ```
 
