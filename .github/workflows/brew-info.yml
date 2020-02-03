@@ -22,9 +22,9 @@ jobs:
           ref: "gh-pages"
           path: "gh-pages"
       - name: Get brew configuration
+        shell: bash
         run: |
-          export nl='echo "" >> gh-pages/README.md'
-#          export code='echo "\`\`\`" >> gh-pages/README.md'
+          export nl='echo "" >> gh-pages/README.md' #          export code='echo "\`\`\`" >> gh-pages/README.md'
           export twocol='echo " --- :| ---" >> gh-pages/README.md'
           mount
           df -h
