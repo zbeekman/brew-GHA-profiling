@@ -9,20 +9,13 @@ env:
   TZ: "UTC"
   NCPU: "2"
   HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+  HOMEBREW_DEVELOPER: "ON"
+  PACKAGES: "open-mpi gcc@8 graphviz"
 
 
 jobs:
   Profile:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest]
-        packages: [open-mpi, gcc@8, graphviz]
-
-    env:
-      PKG: ${{ matrix.packages }}
-
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,17 +27,20 @@ jobs:
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
-          if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
-            printf 'package, pkg-ver, install-time, date, config' > ${DATA_DIR}/${PKG}.csv
-          fi
       - name: Time-it
         shell: bash
         run: |
-          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
-          pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
-          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee brew-install-${PKG}.log)))
-          printf ',\n%s, %s, %s, %s, %s' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
+          for PKG in ${PACKAGES} ; do
+            if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
+              printf 'package, pkg-ver, install-time, date, config' > ${DATA_DIR}/${PKG}.csv
+            fi
+            pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+            pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+            time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee brew-install-${PKG}.log)))
+            printf ',\n%s, %s, %s, %s, %s' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
+          done
       - name: Upload log on failure
+        if: always()
         uses: actions/upload-artifact@v1
         with:
           path: brew-install-${{ matrix.packages }}.log
