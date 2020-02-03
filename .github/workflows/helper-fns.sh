@@ -14,7 +14,8 @@ code () {
 
 twocol () {
     # Print a GFM table header with two columns, the first of which is right-aligned
-    printf '\n --- :| ---\n' >> "${1:-gh-pages/README.md}"
+    printf '\n| key | value |\n'
+    printf '| ---: | --- |\n' >> "${1:-gh-pages/README.md}"
 }
 
 h () {
