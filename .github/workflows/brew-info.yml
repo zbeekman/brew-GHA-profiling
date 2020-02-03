@@ -37,7 +37,8 @@ jobs:
           twocol
           printf '| __date__  | %s |\n' "$(date)" >> $DOC
           printf '| __commit__ | %s |\n' "${GITHUB_SHA}" >> $DOC
-          printf '| __branch__ | %s |\n' "${GITHUB_REF:10}" >> $DOC
+          printf '| __branch__ | %s |\n' "${GITHUB_REF:11}" >> $DOC
+          printf '| __repo__ | %s/%s |\n' "https://github.com" "${GITHUB_REPOSITORY}" >> $DOC
           h 3 'General configuration information'
           time brew info 2>&1 >> $DOC || true
           time h 4 '`brew config`'
@@ -61,6 +62,8 @@ jobs:
           time brew list --versions 2>&1 | to_list || true
           h 4 'homebrew-cask'
           time brew cask list --versions 2>&1 | to_list || true
+          h 4 '`brew cask doctor`'
+          time brew cask doctor 2>&1 | code || true
       - name: Dump on error
         if: always()
         run: cat gh-pages/README.md
