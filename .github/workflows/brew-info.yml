@@ -24,7 +24,7 @@ jobs:
       - name: Get brew configuration
         shell: bash
         run: |
-          . helper-fns.sh
+          . .github/workflows/helper-fns.sh
           type -a code
           type -a twocol
           type -a h
