@@ -34,9 +34,10 @@ jobs:
           env | grep -i 'scratch' || true
           env | grep -i brew || true
           cat .github/workflows/header.md > $DOC
-          printf '__date:__ %s\n' "$(date)" >> $DOC
-          printf '__commit:__ %s\n' "${GITHUB_SHA}" >> $DOC
-          printf '__branch:__ %s\n' "${GITHUB_REF:10}" >> $DOC
+          twocol
+          printf '| __date__  | %s |\n' "$(date)" >> $DOC
+          printf '| __commit__ | %s |\n' "${GITHUB_SHA}" >> $DOC
+          printf '| __branch__ | %s |\n' "${GITHUB_REF:10}" >> $DOC
           h 3 'General configuration information'
           time brew info 2>&1 >> $DOC || true
           time h 4 '`brew config`'
