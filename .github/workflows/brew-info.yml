@@ -33,22 +33,26 @@ jobs:
           env | grep -E -i 'te?mp' || true
           env | grep -i 'scratch' || true
           env | grep -i brew || true
+          cat .github/workflows/header.md > gh-pages/README.md
+          printf '__date:__ %s\n' "$(date)"
+          printf '__commit:__ %s\n' "${GITHUB_SHA}"
+          printf '__branch/ref:__ %s\n' "${GITHUB_REF}"
           h 3 'General configuration information'
           time brew info 2>&1 >> $DOC || true
           time h 4 '`brew config`'
           twocol
-          brew config 2>&1 | sed 's/: / :| /' >> $DOC
-          brew --repo 2>&1 | sed 's/^/ HOMEBREW_REPO :| /' >> $DOC
-          brew --cellar 2>&1 | sed 's/^/ HOMEBREW_CELLAR :| /' >> $DOC
-          brew --cache 2>&1 | sed 's/^/ HOMEBREW_CACHE :| /' >> $DOC
+          brew config 2>&1 | sed 's/: / | /' >> $DOC
+          brew --repo 2>&1 | sed 's/^/ HOMEBREW_REPO | /' >> $DOC
+          brew --cellar 2>&1 | sed 's/^/ HOMEBREW_CELLAR | /' >> $DOC
+          brew --cache 2>&1 | sed 's/^/ HOMEBREW_CACHE | /' >> $DOC
           h 4 '`brew doctor`'
           time brew doctor | code || true
           h 4 'Variables set in environment'
           twocol
-          env | grep BREW | sed 's/=/ :| /' >> $DOC || true
+          env | grep BREW | sed 's/=/ | /' >> $DOC || true
           h 4 'Variables brew sets during install from source'
           twocol
-          brew --env 2>&1 | sed 's/: / :|/' >> $DOC
+          brew --env 2>&1 | sed 's/: / | /' >> $DOC
           h 3 'Installed taps'
           time brew tap-info --installed | code || true
           h 3 'Installed packages'
@@ -63,7 +67,7 @@ jobs:
         run: |
           brew tap homebrew/bundle || true
           brew bundle dump --force --describe --file=GHA-default-Brewfile.txt || true
-      - name: Upload Brefile
+      - name: Upload Brewfile
         uses: actions/upload-artifact@v1
         with:
           name: GHA-Brewfile
@@ -72,7 +76,9 @@ jobs:
         run: |
           cd gh-pages
           git status || true
-          git diff || true
-          git add -u
-          git commit -m "Auto update from GH Actions"
-          git push origin gh-pages
+          git diff
+          if ! git diff --quiet ; then
+            git add -u
+            git commit -m "Auto update from GH Actions"
+            git push origin gh-pages
+          fi
