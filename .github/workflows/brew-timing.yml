@@ -46,7 +46,7 @@ jobs:
           pkg_version="${pkg_version}_$(brew --info --json=v1 ${PKG} | jq '.[].revision')"
           printf ',\n%s, %s, %s, %s, %s' "$PKG" "$pkg_version" "${time[1]}" "date" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
       - name: Upload log on failure
-        uses: actions/upload-articact@v1
+        uses: actions/upload-artifact@v1
         with:
           path: brew-install-${{ matrix.packages }}.log
       - name: Publish data
