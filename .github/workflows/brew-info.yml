@@ -82,6 +82,9 @@ jobs:
           time brew cask list --versions || true
           brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC || true
           nl
+      - name: Dump on error
+        if: always()
+        run: cat gh-pages/README.md
       - name: Dump bundle
         run: |
           brew tap homebrew/bundle || true
@@ -99,6 +102,3 @@ jobs:
           git add -u
           git commit -m "Auto update from GH Actions"
           git push origin gh-pages
-      - name: Dump on error
-        if: error()
-        run: cat gh-pages/README.md
