@@ -1,0 +1,59 @@
+name: Brew Profile
+
+on: [push]
+
+env:
+  CONFIG: "Default"
+  DATA_DIR: "gh-pages/data"
+  DOC: "gh-pages/README.md"
+  TZ: "UTC"
+  NCPU: "2"
+  HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+
+
+jobs:
+  Profile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        packages: [open-mpi, gcc@8, graphviz]
+
+    env:
+      PKG: ${{ matrix.packages }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Setup
+        run: |
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          export STAMP="$(date -s)"
+          if ! [ -f ${DATA_DIR}/${PKG}.csv]; then
+            printf 'package, pkg-ver, install-time, date, config' > ${DATA_DIR}/${PKG}.csv
+          fi
+      - name: Time-it
+        shell: bash
+        run: |
+          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee brew-install-$PKG.log))
+          pkg_version="$(brew --info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="${pkg_version}_$(brew --info --json=v1 ${PKG} | jq '.[].revision')"
+          printf ',\n%s, %s, %s, %s, %s' "$PKG" "$pkg_version" "${time[1]}" "date" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
+      - name: Upload log on failure
+        uses: actions/upload-articact@v1
+        with:
+          path: brew-install-${{ matrix.packages }}.log
+      - name: Publish data
+        run: |
+          cd gh-pages
+          git status || true
+          git diff
+          git add data/*.csv
+          git commit -m "Adding timing data for $PKG [$CONFIG]"
+          git push origin gh-pages
