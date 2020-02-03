@@ -91,3 +91,11 @@ jobs:
         with:
           name: GHA-Brewfile
           path: ./GHA-default-Brewfile.txt
+      - name: Publish Data
+        run: |
+          cd gh-pages
+          git status
+          git diff
+          git add -u
+          git commit
+          git push origin gh-pages
