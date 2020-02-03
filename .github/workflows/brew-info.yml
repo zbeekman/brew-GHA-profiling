@@ -25,7 +25,7 @@ jobs:
         run: |
           alias nl='echo "" >> gh-pages/README.md'
           alias code='echo "\`\`\`" >> gh-pages/README.md'
-          alias twocol='echo " --- :| ---" >> gh-pages/README.md'
+          export twocol='echo " --- :| ---" >> gh-pages/README.md'
           mount
           df -h
           env | grep -E -i 'te?mp' || true
@@ -40,7 +40,7 @@ jobs:
           echo "#### 'brew config'" >> $DOC
           nl
           time brew config
-          twocol
+          $twocol
           brew config 2>&1 | sed 's/: / :| /' >> $DOC
           brew --repo 2>&1 | sed 's/^/ HOMEBREW_REPO :| /' >> $DOC
           brew --cellar 2>&1 | sed 's/^/ HOMEBREW_CELLAR :| /' >> $DOC
@@ -55,12 +55,12 @@ jobs:
           nl
           echo "#### Variables set in environment"
           nl
-          twocol
+          $twocol
           env | grep BREW | sed 's/=/ :| /' >> $DOC || true
           nl
           echo "#### Variables brew sets during install from source"
           nl
-          twocol
+          $twocol
           brew --env 2>&1 | sed 's/: / :|/' >> $DOC
           nl
           echo "### Installed taps" >> $DOC
@@ -99,3 +99,6 @@ jobs:
           git add -u
           git commit -m "Auto update from GH Actions"
           git push origin gh-pages
+      - name: Dump on error
+        if: error()
+        run: cat gh-pages/README.md
