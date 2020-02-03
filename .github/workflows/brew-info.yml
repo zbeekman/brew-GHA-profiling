@@ -28,9 +28,9 @@ jobs:
           alias twocol='echo " --- :| ---" >> gh-pages/README.md'
           mount
           df -h
-          env | grep -E -i 'TE?MP'
-          env | grep -i 'SCRATCH'
-          env | grep -i brew
+          env | grep -E -i 'te?mp' || true
+          env | grep -i 'scratch' || true
+          env | grep -i brew || true
           nl
           echo "### General configuration information" >> $DOC
           nl
@@ -49,14 +49,14 @@ jobs:
           echo "#### 'brew doctor'" >> $DOC
           nl
           code
-          time brew doctor
-          brew doctor 2>&1 | sed '1,4d' >> $DOC
+          time brew doctor || true
+          brew doctor 2>&1 | sed '1,4d' >> $DOC || true
           code
           nl
           echo "#### Variables set in environment"
           nl
           twocol
-          env | grep BREW | sed 's/=/ :| /' >> $DOC
+          env | grep BREW | sed 's/=/ :| /' >> $DOC || true
           nl
           echo "#### Variables brew sets during install from source"
           nl
@@ -64,7 +64,7 @@ jobs:
           brew --env 2>&1 | sed 's/: / :|/' >> $DOC
           nl
           echo "### Installed taps" >> $DOC
-          time brew tap-info --installed | tee tap-info.txt
+          time brew tap-info --installed | tee tap-info.txt || true
           nl
           code
           cat tap-info.txt >> $DOC
@@ -79,13 +79,13 @@ jobs:
           nl
           echo "#### homebrew-cask" >> $DOC
           nl
-          time brew cask list --versions
-          brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC
+          time brew cask list --versions || true
+          brew cask list --versions 2>&1 | sed 's/^/  * ' >> $DOC || true
           nl
       - name: Dump bundle
         run: |
-          brew tap homebrew/bundle
-          brew bundle dump --force --describe GHA-default-Brewfile.txt
+          brew tap homebrew/bundle || true
+          brew bundle dump --force --describe GHA-default-Brewfile.txt || true
       - name: Upload Brefile
         uses: actions/upload-artifact@v1
         with:
@@ -94,8 +94,8 @@ jobs:
       - name: Publish Data
         run: |
           cd gh-pages
-          git status
-          git diff
+          git status || true
+          git diff || true
           git add -u
-          git commit
+          git commit -m "Auto update from GH Actions"
           git push origin gh-pages
