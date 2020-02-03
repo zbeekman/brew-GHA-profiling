@@ -69,6 +69,7 @@ jobs:
         run: cat gh-pages/README.md
       - name: Dump bundle
         run: |
+          brew install mas || true
           brew tap homebrew/bundle || true
           brew bundle dump --force --describe --file=GHA-default-Brewfile.txt || true
           if [ -f GHA-default-Brewfile.txt ]; then
