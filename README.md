@@ -21,10 +21,10 @@ The three CSV files with timing data are:
 
 | key | value |
 | ---: | --- |
-| __date__  | Tue Feb  4 03:41:34 UTC 2020 |
-| __commit__ | [34e99da4e45398c76493d7682f793c74c2f7b7b2](https://github.com/zbeekman/brew-GHA-profiling/tree/34e99da4e45398c76493d7682f793c74c2f7b7b2) |
+| __date__  | Tue Feb  4 03:49:53 UTC 2020 |
+| __commit__ | [f185a02f80bba7fd15f32c869283ab3c81c408dc](https://github.com/zbeekman/brew-GHA-profiling/tree/f185a02f80bba7fd15f32c869283ab3c81c408dc) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
-| __repo__ | [https://github.com/zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
+| __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
 ### General configuration information
 
