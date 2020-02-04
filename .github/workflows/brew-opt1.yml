@@ -41,6 +41,10 @@ jobs:
         with:
           ref: "gh-pages"
           path: "gh-pages"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
       - name: Set runner vars
         run: |
           echo "::set-env name=HOMEBREW_CACHE::${{ runner.temp }}/brew-cache"
