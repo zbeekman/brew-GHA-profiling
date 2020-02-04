@@ -100,7 +100,7 @@ jobs:
   Profile:
     env:
       CONFIG: "Default"
-      DATA_DIR: "gh-pages/data"
+      DATA_DIR: "gh-pages"
       PACKAGES: "open-mpi gcc@8 graphviz"
       HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
       HOMEBREW_DEVELOPER: "ON"
@@ -142,6 +142,6 @@ jobs:
           cd gh-pages
           git status || true
           git diff
-          git add data/*.csv
+          git add *.csv
           git commit -m "Adding timing data for $PACKAGES [$CONFIG]"
           git push origin gh-pages
