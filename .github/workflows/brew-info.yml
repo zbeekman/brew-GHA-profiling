@@ -133,7 +133,7 @@ jobs:
           name: brew-config
       - name: Publish data
         run: |
-          mv brew-config/${DOC} gh-pages/
+          mv brew-config/${DOC} gh-pages/README.md
           cd gh-pages
           git status || true
           git diff
