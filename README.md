@@ -8,8 +8,8 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 | key | value |
 | ---: | --- |
-| __date__  | Mon Feb  3 23:59:29 UTC 2020 |
-| __commit__ | 120ced9df1882b082c28ea4fbeac0cf8e3e8ab2d |
+| __date__  | Tue Feb  4 00:08:31 UTC 2020 |
+| __commit__ | 750d1b23a2c3b88c80ac4d555f060ecb249f0660 |
 | __branch__ | master |
 | __repo__ | https://github.com/zbeekman/brew-GHA-profiling |
 
@@ -30,8 +30,6 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 | Core tap HEAD | a3f99229e70c970a9c3e8c1d92f477c561e06cda |
 | Core tap last commit | 2 weeks ago |
 | HOMEBREW_PREFIX | /usr/local |
-| HOMEBREW_DEVELOPER | ON |
-| HOMEBREW_DISPLAY_INSTALL_TIMES | ON |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
 | CPU | quad-core 64-bit ivybridge |
@@ -59,9 +57,7 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 | key | value |
 | ---: | --- |
-HOMEBREW_DEVELOPER | ON
 HOMEBREW_NO_AUTO_UPDATE | 1
-HOMEBREW_DISPLAY_INSTALL_TIMES | ON
 
 #### Variables brew sets during install from source
 
