@@ -141,7 +141,7 @@ jobs:
 
   Deploy:
     needs: Profile
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -158,7 +158,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: csvs
-      - name: Publish data
+      - name: Ready Data
         run: |
           ls csvs
           mv csvs/*.csv gh-pages/
@@ -166,7 +166,19 @@ jobs:
           cd gh-pages
           git status || true
           git diff
-          git add README.md
-          git add *.csv
-          git commit -m "Adding timing data and configuration info"
-          git push origin gh-pages
+          ls -la
+          rm -rf .git
+          ls -la
+          cd ..
+      - name: Publish data
+        uses: docker://peaceiris/gh-pages:v2
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./gh-pages
+        with:
+          emptyCommits: true
+          keepFiles: true
+          forceOrphan: false
+          commitMessage: ${{ github.event.head_commit.message }}
+          username: ${{ github.actor }}

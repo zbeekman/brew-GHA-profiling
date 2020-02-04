@@ -24,10 +24,10 @@ Then I will move on to some optimization experiments.
 By default, it looks like GitHub is turning off automatic update checking with `HOMEBREW_NO_AUTO_UPDATE`, which is a good start.
 I'm going to test (in batch) the following additional variables that may (or may not) improve install times:
 
-- HOMEBREW_NO_ANALYTICS
-- HOMEBREW_NO_GITHUB_API
-- HOMEBREW_NO_INSTALL_CLEANUP
-- HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK
+- `HOMEBREW_NO_ANALYTICS`
+- `HOMEBREW_NO_GITHUB_API`
+- `HOMEBREW_NO_INSTALL_CLEANUP`
+- `HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK`
 
 The last option won't make a difference most of the time,
 but it will cause you job to fail rather than attempt to build tooling from source when there is a binary package available yet.
