@@ -92,13 +92,19 @@ jobs:
   Profile:
     env:
       CONFIG: "Default"
-      DATA_DIR: "gh-pages"
-      PACKAGES: "open-mpi gcc@8 graphviz"
+      DATA_DIR: "gh-pages/csvs"
       HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
       HOMEBREW_DEVELOPER: "ON"
+      PKG: ${{ matrix.packages }}
 
     needs: Get-brew-info
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        packages: [open-mpi, gcc@8, graphviz]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -114,32 +120,51 @@ jobs:
       - name: Time-it
         shell: bash
         run: |
-          for PKG in ${PACKAGES} ; do
-            if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
-              printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}.csv
-            fi
-            pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
-            pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
-            time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
-            printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
-          done
+          if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
+            printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}.csv
+          fi
+          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
       - name: Upload log on failure
         if: always()
         uses: actions/upload-artifact@v1
         with:
           path: logs
           name: brew-install-logs
+      - name: Upload CSV
+        uses: actions/upload-artiface@v1
+        with:
+          name: csvs
+          path: ${{ env.DATA_DIR }}
+
+  Deploy:
+    needs: Profile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
       - name: Get vanilla config
         uses: actions/download-artifact@v1
         with:
           name: brew-config
+      - name: Get timing csvs
+        uses: actions/download-artifact@v1
+        with:
+          name: csvs
       - name: Publish data
         run: |
+          ls csvs
+          mv csvs/*.csv gh-pages/
           mv brew-config/${DOC} gh-pages/README.md
           cd gh-pages
           git status || true
           git diff
           git add README.md
           git add *.csv
-          git commit -m "Adding timing data for $PACKAGES [$CONFIG]"
+          git commit -m "Adding timing data and configuration info"
           git push origin gh-pages
