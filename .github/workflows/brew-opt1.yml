@@ -14,7 +14,7 @@ jobs:
 
   Profile:
     env:
-      CONFIG: "EnvOpt"
+      CONFIG: "EnvOpt-v2"
       DATA_DIR: "gh-pages/csvs"
 #      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
       HOMEBREW_NO_ANALYTICS: "ON"
@@ -44,6 +44,9 @@ jobs:
           echo "::set-env name=HOMEBREW_CACHE::${{ runner.temp }}/brew-cache"
           echo "::set-env name=HOMEBREW_LOGS::${{ runner.temp }}/brew-logs"
           echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
+          echo "::set-env name=HOMEBREW_PREFIX::$(brew --prefix)"
+          echo "::set-env name=HOMEBREW_CELLAR::$(brew --cellar)"
+          echo "::set-env name=HOMEBREW_REPOSITORY::$(brew --repo)"
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
