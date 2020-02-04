@@ -18,12 +18,15 @@ jobs:
     env:
       CONFIG: "EnvOpt"
       DATA_DIR: "gh-pages/csvs"
-      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+#      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
       HOMEBREW_NO_ANALYTICS: "ON"
       HOMEBREW_NO_AUTO_UPDATE: "ON" # Already enabled in the environment
       HOMEBREW_NO_GITHUB_API: "ON"
       HOMEBREW_NO_INSTALL_CLEANUP: "ON"
       HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
+      HOMEBREW_CACHE: ${{ runner.temp }}/brew-cache
+      HOMEBREW_LOGS: ${{ runner.temp }}/brew-logs
+      HOMEBREW_TEMP: ${{ runner.temp }}/brew-temp
       PKG: ${{ matrix.packages }}
 
     runs-on: ${{ matrix.os }}
@@ -46,6 +49,7 @@ jobs:
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
           cp gh-pages/*.csv ${DATA_DIR}/
           mkdir logs || true
+          mkdir -p ${HOMEBREW_CACHE} ${HOMEBREW_LOGS} ${HOMEBREW_TEMP}
       - name: Dump runner context
         run: |
           ls -ld ${{ runner.tool_cache }}
