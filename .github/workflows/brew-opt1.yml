@@ -119,3 +119,12 @@ jobs:
           forceOrphan: false
           commitMessage: ${{ github.event.head_commit.message }}
           username: ${{ github.actor }}
+      - name: Trigger opt2
+        if: contains( github.event_name, 'schedule' )
+        run: |
+          git branch
+          touch .github/workflows/brew-opt2.yml
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git commit --allow-empty -m "Update opt2 from opt1"
+          git push origin
