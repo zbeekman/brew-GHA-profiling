@@ -1,8 +1,6 @@
 name: Brew Opt Caching
 
 on:
-  push:
-    branches: master
   schedule:
     - cron: '8,28,48 * * * *'
   # Caching not supported for cron jobs at this time
