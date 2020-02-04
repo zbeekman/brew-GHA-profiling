@@ -94,7 +94,6 @@ jobs:
       CONFIG: "Default"
       DATA_DIR: "gh-pages/csvs"
       HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
-      HOMEBREW_DEVELOPER: "ON"
       PKG: ${{ matrix.packages }}
 
     needs: Get-brew-info
@@ -116,6 +115,7 @@ jobs:
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          cp gh-pages/*.csv ${DATA_DIR}/
           mkdir logs || true
       - name: Time-it
         shell: bash
@@ -143,6 +143,8 @@ jobs:
     needs: Profile
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Checkout Pages/Data Branch
         uses: actions/checkout@v2
         with:
