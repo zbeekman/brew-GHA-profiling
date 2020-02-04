@@ -3,9 +3,10 @@ name: Brew Opt Caching
 on:
   push:
     branches: master
-  # schedule:
-  #   - cron: '8,28,48 * * * *'
+  schedule:
+    - cron: '8,28,48 * * * *'
   # Caching not supported for cron jobs at this time
+  # Add extra logic for cache miss to simulate caching
 
 env:
   TZ: "UTC"
@@ -48,10 +49,14 @@ jobs:
           echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
       - name: Restore Cache
         uses: actions/cache@v1
+        id: cache
         with:
           path: ${{ env.HOMEBREW_CACHE }}
           key: brew-cache-
           restore-keys: brew-cache-
+      - name: Get bottles
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew fetch --deps --retry $PKG
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
