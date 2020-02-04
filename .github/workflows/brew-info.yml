@@ -34,6 +34,7 @@ jobs:
           env | grep -E -i 'te?mp' || true
           env | grep -i 'scratch' || true
           env | grep -i brew || true
+          env | grep -i proxy || true
           cat .github/workflows/header.md > $DOC
           twocol
           printf '| __date__  | %s |\n' "$(date)" >> $DOC
@@ -53,6 +54,7 @@ jobs:
           h 4 'Variables set in environment'
           twocol
           env | grep BREW | sed 's/=/ | /' >> $DOC || true
+          env | grep _proxy | sed 's/=/ | /' >> $DOC || true
           h 4 'Variables brew sets during install from source'
           twocol
           brew --env 2>&1 | sed -e 's/^ *export */| /' -e 's/=/ | /' -e 's/$/ |/' >> $DOC
