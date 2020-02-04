@@ -5,7 +5,7 @@ and to run profiling experiments on ways to try to speedup Homebrew on GitHub ac
 
 Currently, no posting/analysis is being done on the timing data collected during this workflow.
 However, the CSV files with install times for the three packages are being tracked and updated.
-These can be downloaded from the deployed webpage (https://izaakbeekman.com/brew-GHA-profiling) or
+These can be downloaded from the deployed webpage ([https://izaakbeekman.com/brew-GHA-profiling]) or
 browsed and downloaded from the [`gh-pages` branch] of the main repository.
 The three CSV files with timing data are:
 
@@ -14,6 +14,7 @@ The three CSV files with timing data are:
 * [`graphviz.csv`](./graphviz.csv)
 
 [`gh-pages` branch]: https://github.com/zbeekman/brew-GHA-profiling/tree/gh-pages
+[https://izaakbeekman.com/brew-GHA-profiling]: https://izaakbeekman.com/brew-GHA-profiling
 
 ## Homebrew defaults on GitHub Actions
 

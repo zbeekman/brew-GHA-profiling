@@ -134,7 +134,7 @@ jobs:
           path: logs
           name: brew-install-logs
       - name: Upload CSV
-        uses: actions/upload-artiface@v1
+        uses: actions/upload-artifact@v1
         with:
           name: csvs
           path: ${{ env.DATA_DIR }}
