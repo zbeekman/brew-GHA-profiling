@@ -37,9 +37,9 @@ jobs:
           cat .github/workflows/header.md > $DOC
           twocol
           printf '| __date__  | %s |\n' "$(date)" >> $DOC
-          printf '| __commit__ | %s |\n' "${GITHUB_SHA}" >> $DOC
-          printf '| __branch__ | %s |\n' "${GITHUB_REF:11}" >> $DOC
-          printf '| __repo__ | %s/%s |\n' "https://github.com" "${GITHUB_REPOSITORY}" >> $DOC
+          printf '| __commit__ | %s |\n' "[${GITHUB_SHA}](https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_SHA})" >> $DOC
+          printf '| __branch__ | %s |\n' "[${GITHUB_REF:11}](https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF:11})" >> $DOC
+          printf '| __repo__ | %s |\n' "[https://github.com/${GITHUB_REPOSITORY}](https://github.com/${GITHUB_REPOSITORY})" >> $DOC
           h 3 'General configuration information'
           time brew info 2>&1 >> $DOC || true
           time h 4 '`brew config`'
