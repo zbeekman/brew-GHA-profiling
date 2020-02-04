@@ -1,6 +1,8 @@
 name: Brew Info
 
 on:
+  push:
+    branches: master
   schedule:
     - cron: '37 2,5 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
 
@@ -94,7 +96,6 @@ jobs:
       HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
       PKG: ${{ matrix.packages }}
 
-    needs: Get-brew-info
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -138,7 +139,7 @@ jobs:
           path: ${{ env.DATA_DIR }}/${{ matrix.packages }}.csv
 
   Deploy:
-    needs: Profile
+    needs: [Profile, Get-brew-info]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
