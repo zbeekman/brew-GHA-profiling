@@ -1,4 +1,7 @@
-# brew-GHA-profiling
+# Profiling and Getting Detailed Homebrew-on-Github-Actions Setup Information
+
+![Build (push)](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=push)  
+![Cron Deploy](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=schedule)
 
 ## About
 
@@ -34,5 +37,12 @@ but it will cause you job to fail rather than attempt to build tooling from sour
 This is only relavent when there is a network hiccup or some other similar exception and homebrew cannot fetch a bottle for a package.
 But this will save GitHub some compute time and make it so that your CI jobs fail rapidly rather than compile a whole bunch of tooling from source.
 
+### Caching
+
+The next optimization attempt will be to cache and restore the `$(brew --cache)` directory.
+Initial experiments suggest that GitHub actions are not proxying downloads, but this may be incorrect.
+If we can do this ourselves, we should see a bit of a speedup.
+It would be nice to cache more homebrew state, including the entire dependency tree of the requested packages in the Cellar,
+but, these files may be to large and there's no good/easy way that I know of to extract and cache just the requested packages (and their dependencies).
 
 [workflows]: ./.github/workflows
