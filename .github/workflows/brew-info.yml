@@ -7,7 +7,7 @@ on:
     - cron: '37 6 * * 0' # Sunday mornings at 6:37 AM UTC (just before midnight Saturday eastern)
 
 env:
-  DOC: "gh-pages/README.md"
+  DOC: "index.md"
   TZ: "UTC"
   NCPU: "2"
   CI: "ON"
@@ -19,11 +19,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Checkout Pages
-        uses: actions/checkout@v2
-        with:
-          ref: "gh-pages"
-          path: "gh-pages"
       - name: Get brew configuration
         shell: bash
         run: |
@@ -70,7 +65,7 @@ jobs:
           time brew cask doctor 2>&1 | code || true
       - name: Dump on error
         if: always()
-        run: cat gh-pages/README.md
+        run: cat ${DOC}
       - name: Dump bundle
         run: |
           brew install mas || true
@@ -86,16 +81,11 @@ jobs:
         with:
           name: GHA-Brewfile
           path: ./GHA-default-Brewfile.txt
-      - name: Publish Data
-        run: |
-          cd gh-pages
-          git status || true
-          git diff
-          if ! git diff --quiet ; then
-            git add -u
-            git commit -m "Auto update from GH Actions"
-            git push origin gh-pages
-          fi
+      - name: Upload gh-pages
+        uses: actions/upload-artifact@v1
+        with:
+          name: brew-config
+          path: ${{ env.DOC }}
 
   Profile:
     env:
@@ -137,11 +127,17 @@ jobs:
         with:
           path: logs
           name: brew-install-logs
+      - name: Get vanilla config
+        uses: actions/download-artifact@v1
+        with:
+          name: brew-config
       - name: Publish data
         run: |
+          mv brew-config/${DOC} gh-pages/
           cd gh-pages
           git status || true
           git diff
+          git add ${DOC}
           git add *.csv
           git commit -m "Adding timing data for $PACKAGES [$CONFIG]"
           git push origin gh-pages
