@@ -1,7 +1,8 @@
 # Profiling and Getting Detailed Homebrew-on-Github-Actions Setup Information
 
-![Build (push)](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=push)  
-![Cron Deploy](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=schedule)
+| Push build | ![Build (push)](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=push) |
+| ---: | --- |
+| __Cron deploy__ | ![Cron Deploy](https://github.com/zbeekman/brew-GHA-profiling/workflows/Brew%20Info/badge.svg?event=schedule) |
 
 ## About
 
