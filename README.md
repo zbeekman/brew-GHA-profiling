@@ -7,6 +7,11 @@ Currently, no posting/analysis is being done on the timing data collected during
 However, the CSV files with install times for the three packages are being tracked and updated.
 These can be downloaded from the deployed webpage (https://izaakbeekman.com/brew-GHA-profiling) or
 browsed and downloaded from the [`gh-pages` branch] of the main repository.
+The three CSV files with timing data are:
+
+* [`open-mpi.csv`](./open-mpi.csv)
+* [`gcc@8.csv`](./gcc@8.csv)
+* [`graphviz.csv`](./graphviz.csv)
 
 [`gh-pages` branch]: https://github.com/zbeekman/brew-GHA-profiling/tree/gh-pages
 
@@ -15,8 +20,8 @@ browsed and downloaded from the [`gh-pages` branch] of the main repository.
 
 | key | value |
 | ---: | --- |
-| __date__  | Tue Feb  4 00:52:47 UTC 2020 |
-| __commit__ | 9784a639ef1cdf556c2c8549a326a126f6859819 |
+| __date__  | Tue Feb  4 01:38:39 UTC 2020 |
+| __commit__ | 73eb5107271f4d2abc9f7d96fd22ecfc01f6f189 |
 | __branch__ | master |
 | __repo__ | https://github.com/zbeekman/brew-GHA-profiling |
 
