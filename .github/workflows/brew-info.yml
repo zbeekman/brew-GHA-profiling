@@ -1,12 +1,8 @@
 name: Brew Info
 
 on:
-  push:
-    branches: master
   schedule:
-    - cron: '37 6 * * 0' # Sunday mornings at 6:37 AM UTC (just before midnight Saturday eastern)
-    - cron: '37 * * * *' # Once an hour to collect a decent amount of data over the next ~12 hours
-# Don't forget to disable the line above!!
+    - cron: '37 2,5 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
 
 env:
   DOC: "index.md"
