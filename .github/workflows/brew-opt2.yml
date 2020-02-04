@@ -1,0 +1,130 @@
+name: Brew Opt Caching
+
+on:
+  push:
+    branches: master
+  schedule:
+    - cron: '8,28,48 * * * *'
+# Don't forget to disable the line above!!
+
+env:
+  TZ: "UTC"
+  NCPU: "4"
+  CI: "ON"
+
+jobs:
+
+  Profile:
+    env:
+      CONFIG: "Caching"
+      DATA_DIR: "gh-pages/csvs"
+#      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+      HOMEBREW_NO_ANALYTICS: "ON"
+      HOMEBREW_NO_AUTO_UPDATE: "ON" # Already enabled in the environment
+      HOMEBREW_NO_GITHUB_API: "ON"
+      HOMEBREW_NO_INSTALL_CLEANUP: "ON"
+      HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
+      PKG: ${{ matrix.packages }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        packages: [open-mpi, gcc@8, graphviz]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Set runner vars
+        run: |
+          echo "::set-env name=HOMEBREW_CACHE::${{ runner.temp }}/brew-cache"
+          echo "::set-env name=HOMEBREW_LOGS::${{ runner.temp }}/brew-logs"
+          echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
+      - name: Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.HOMEBREW_CACHE }}
+          key: brew-cache-${{ matrix.packages }}
+          restore-keys: brew-cache-
+      - name: Setup
+        run: |
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          cp gh-pages/*.csv ${DATA_DIR}/
+          mkdir logs || true
+          mkdir -p ${HOMEBREW_CACHE} ${HOMEBREW_LOGS} ${HOMEBREW_TEMP} || true
+      - name: Dump runner context
+        run: |
+          ls -ld ${{ runner.tool_cache }}
+          ls -la ${{ runner.tool_cache }}
+          ls -ld ${{ runner.temp }}
+          ls -la ${{ runner.temp }}
+          ls -la ${{ runner.temp }}/_github_workflow
+          ls -ld $(brew --cache)
+          ls -la $(brew --cache)
+          df -h
+          mount -v
+
+      - name: Time-it
+        shell: bash
+        run: |
+          if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
+            printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          fi
+          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          ls -la {$HOMEBREW_TEMP}
+      - name: Upload log on failure
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          path: logs
+          name: brew-install-logs
+      - name: Upload CSV
+        uses: actions/upload-artifact@v1
+        with:
+          name: csvs
+          path: ${{ env.DATA_DIR }}/${{ matrix.packages }}-${{ env.CONFIG }}.csv
+
+  Deploy:
+    needs: Profile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Get timing csvs
+        uses: actions/download-artifact@v1
+        with:
+          name: csvs
+      - name: Ready Data
+        run: |
+          ls csvs
+          mv csvs/*.csv gh-pages/
+          cd gh-pages
+          git status
+          git diff
+          cd ..
+      - name: Publish data
+        uses: docker://peaceiris/gh-pages:v2
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./gh-pages
+        with:
+          emptyCommits: true
+          keepFiles: true
+          forceOrphan: false
+          commitMessage: ${{ github.event.head_commit.message }}
+          username: ${{ github.actor }}
