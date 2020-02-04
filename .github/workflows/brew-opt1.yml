@@ -24,9 +24,6 @@ jobs:
       HOMEBREW_NO_GITHUB_API: "ON"
       HOMEBREW_NO_INSTALL_CLEANUP: "ON"
       HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
-      HOMEBREW_CACHE: ${{ runner.temp }}/brew-cache
-      HOMEBREW_LOGS: ${{ runner.temp }}/brew-logs
-      HOMEBREW_TEMP: ${{ runner.temp }}/brew-temp
       PKG: ${{ matrix.packages }}
 
     runs-on: ${{ matrix.os }}
@@ -44,6 +41,11 @@ jobs:
         with:
           ref: "gh-pages"
           path: "gh-pages"
+      - name: Set runner vars
+        run: |
+          echo "::set-env name=HOMEBREW_CACHE::${{ runner.temp }}/brew-cache"
+          echo "::set-env name=HOMEBREW_LOGS::${{ runner.temp }}/brew-logs"
+          echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
