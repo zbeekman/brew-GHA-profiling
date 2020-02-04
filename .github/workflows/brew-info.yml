@@ -43,8 +43,8 @@ jobs:
           time brew info 2>&1 >> $DOC || true
           system_profiler SPHardwareDataType | code
           twocol
-          printf '|   cores | %s |\n' "$(sysctl -n hw.logicalcpu)"
-          printf '| threads | %s |\n' "$(sysctl -n hw.physicalcpu)"
+          printf '|   cores | %s |\n' "$(sysctl -n hw.logicalcpu)"  >> $DOC
+          printf '| threads | %s |\n' "$(sysctl -n hw.physicalcpu)" >> $DOC
           time h 4 '`brew config`'
           twocol
           brew config 2>&1   | sed -e 's/^/| /'     -e 's/: / | /' -e 's/$/ |/' >> $DOC
