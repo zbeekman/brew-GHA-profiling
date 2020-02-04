@@ -3,9 +3,9 @@ name: Brew Opt Caching
 on:
   push:
     branches: master
-  schedule:
-    - cron: '8,28,48 * * * *'
-# Don't forget to disable the line above!!
+  # schedule:
+  #   - cron: '8,28,48 * * * *'
+  # Caching not supported for cron jobs at this time
 
 env:
   TZ: "UTC"
@@ -81,6 +81,8 @@ jobs:
           time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
           ls -la ${HOMEBREW_TEMP}
+          ls -la ${HOMEBREW_LOGS}
+          ls -la ${HOMEBREW_CACHE}
       - name: Upload log on failure
         if: always()
         uses: actions/upload-artifact@v1
