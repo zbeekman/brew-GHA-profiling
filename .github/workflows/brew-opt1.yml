@@ -1,8 +1,6 @@
 name: Brew Opt EnvVar
 
 on:
-  push:
-    branches: master
   schedule:
     - cron: '18,38,58 * * * *'
 # Don't forget to disable the line above!!
