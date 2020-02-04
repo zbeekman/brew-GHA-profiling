@@ -24,14 +24,39 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Tue Feb  4 17:22:19 UTC 2020 |
-| __commit__ | [58c5be2617e2985d6128b52de4bb28329f183ea8](https://github.com/zbeekman/brew-GHA-profiling/tree/58c5be2617e2985d6128b52de4bb28329f183ea8) |
+| __date__  | Tue Feb  4 17:41:54 UTC 2020 |
+| __commit__ | [81ef5df492d943727df14e9102b89b14842da071](https://github.com/zbeekman/brew-GHA-profiling/tree/81ef5df492d943727df14e9102b89b14842da071) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
 ### General configuration information
 
 59 kegs, 99,100 files, 1.5GB
+
+```
+Hardware:
+
+    Hardware Overview:
+
+      Model Name: Apple device
+      Model Identifier: VMware7,1
+      Processor Speed: 3.33 GHz
+      Number of Processors: 2
+      Total Number of Cores: 4
+      L2 Cache (per Core): 256 KB
+      L3 Cache (per Processor): 12 MB
+      Memory: 12 GB
+      Boot ROM Version: VMW71.00V.13989454.B64.1906190538
+      Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
+      SMC Version (system): 2.8f0
+      Serial Number (system): VMaYOx9wlLrG
+      Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
+
+```
+
+
+| `key` | `value` |
+| ---: | --- |
 
 #### `brew config`
 
@@ -60,13 +85,6 @@ The three CSV files with timing data are:
 | HOMEBREW_REPO | /usr/local/Homebrew |
 | HOMEBREW_CELLAR | /usr/local/Cellar |
 | HOMEBREW_CACHE | /Users/runner/Library/Caches/Homebrew |
-
-#### `brew doctor`
-
-
-```
-```
-
 
 #### Variables set in environment
 
@@ -179,6 +197,13 @@ From: https://github.com/Homebrew/homebrew-core
   * wget 1.20.3_2
   * xctool 0.3.7
   * xz 5.2.4
+
+#### `brew doctor`
+
+
+```
+```
+
 
 #### homebrew-cask
 
