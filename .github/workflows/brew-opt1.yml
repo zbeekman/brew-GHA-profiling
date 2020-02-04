@@ -1,0 +1,118 @@
+name: Brew Opt EnvVar
+
+on:
+  push:
+    branches: master
+  schedule:
+    - cron: '51 * * * *' # Once an hour to collect a decent amount of data over the next ~12 hours
+# Don't forget to disable the line above!!
+
+env:
+  TZ: "UTC"
+  NCPU: "4"
+  CI: "ON"
+
+jobs:
+
+  Profile:
+    env:
+      CONFIG: "EnvOpt"
+      DATA_DIR: "gh-pages/csvs"
+      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+      HOMEBREW_NO_ANALYTICS: "ON"
+      HOMEBREW_NO_AUTO_UPDATE: "ON" # Already enabled in the environment
+      HOMEBREW_NO_GITHUB_API: "ON"
+      HOMEBREW_NO_INSTALL_CLEANUP: "ON"
+      HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
+      PKG: ${{ matrix.packages }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        packages: [open-mpi, gcc@8, graphviz]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Setup
+        run: |
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          cp gh-pages/*.csv ${DATA_DIR}/
+          mkdir logs || true
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+          run: echo "$RUNNER_CONTEXT"
+
+      - name: Time-it
+        shell: bash
+        run: |
+          if ! [ -f ${DATA_DIR}/${PKG}.csv ] ; then
+            printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}.csv
+          fi
+          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}.csv
+      - name: Upload log on failure
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          path: logs
+          name: brew-install-logs
+      - name: Upload CSV
+        uses: actions/upload-artifact@v1
+        with:
+          name: csvs
+          path: ${{ env.DATA_DIR }}/${{ matrix.packages }}.csv
+
+  # Deploy:
+  #   needs: Profile
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Checkout Pages/Data Branch
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: "gh-pages"
+  #         path: "gh-pages"
+  #     - name: Get vanilla config
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: brew-config
+  #     - name: Get timing csvs
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: csvs
+  #     - name: Ready Data
+  #       run: |
+  #         ls csvs
+  #         mv csvs/*.csv gh-pages/
+  #         mv brew-config/${DOC} gh-pages/README.md
+  #         cd gh-pages
+  #         git status || true
+  #         git diff
+  #         ls -la
+  #         rm -rf .git
+  #         ls -la
+  #         cd ..
+  #     - name: Publish data
+  #       uses: docker://peaceiris/gh-pages:v2
+  #       env:
+  #         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+  #         PUBLISH_BRANCH: gh-pages
+  #         PUBLISH_DIR: ./gh-pages
+  #       with:
+  #         emptyCommits: true
+  #         keepFiles: true
+  #         forceOrphan: false
+  #         commitMessage: ${{ github.event.head_commit.message }}
+  #         username: ${{ github.actor }}

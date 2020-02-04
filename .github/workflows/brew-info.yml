@@ -1,15 +1,13 @@
 name: Brew Info
 
 on:
-  push:
-    branches: master
   schedule:
     - cron: '37 2,5 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
 
 env:
   DOC: "index.md"
   TZ: "UTC"
-  NCPU: "2"
+  NCPU: "4"
   CI: "ON"
 
 jobs:
