@@ -47,9 +47,13 @@ jobs:
           cp gh-pages/*.csv ${DATA_DIR}/
           mkdir logs || true
       - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+        run: |
+          ls -ld ${{ runner.tool_cache }}
+          ls -la ${{ runner.tool_cache }}
+          ls -ld ${{ runner.temp }}
+          ls -la ${{ runner.temp }}
+          df -h
+          mount -v
 
       - name: Time-it
         shell: bash
