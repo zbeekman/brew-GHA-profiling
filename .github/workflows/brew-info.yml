@@ -137,7 +137,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: csvs
-          path: ${{ env.DATA_DIR }}
+          path: ${{ env.DATA_DIR }}/${{ matrix.packages }}.csv
 
   Deploy:
     needs: Profile
