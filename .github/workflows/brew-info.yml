@@ -7,16 +7,10 @@ on:
     - cron: '37 6 * * 0' # Sunday mornings at 6:37 AM UTC (just before midnight Saturday eastern)
 
 env:
-  CONFIG: "Default"
-  DATA_DIR: "gh-pages/data"
-  PACKAGES: "open-mpi gcc@8 graphviz"
   DOC: "gh-pages/README.md"
   TZ: "UTC"
   NCPU: "2"
   CI: "ON"
-  HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
-  HOMEBREW_DEVELOPER: "ON"
-
 
 jobs:
 
@@ -104,6 +98,13 @@ jobs:
           fi
 
   Profile:
+    env:
+      CONFIG: "Default"
+      DATA_DIR: "gh-pages/data"
+      PACKAGES: "open-mpi gcc@8 graphviz"
+      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+      HOMEBREW_DEVELOPER: "ON"
+
     needs: Get-brew-info
     runs-on: macos-latest
     steps:
