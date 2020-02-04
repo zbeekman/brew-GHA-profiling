@@ -5,6 +5,8 @@ on:
     branches: master
   schedule:
     - cron: '37 6 * * 0' # Sunday mornings at 6:37 AM UTC (just before midnight Saturday eastern)
+    - cron: '37 * * * *' # Once an hour to collect a decent amount of data over the next ~12 hours
+# Don't forget to disable the line above!!
 
 env:
   DOC: "index.md"
