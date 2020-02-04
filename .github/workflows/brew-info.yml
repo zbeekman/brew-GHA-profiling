@@ -2,7 +2,7 @@ name: Brew Info
 
 on:
   schedule:
-    - cron: '37 2,5 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
+    - cron: '33 2,5 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
 
 env:
   DOC: "index.md"

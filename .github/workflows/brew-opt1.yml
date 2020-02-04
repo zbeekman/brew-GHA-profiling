@@ -4,7 +4,7 @@ on:
   push:
     branches: master
   schedule:
-    - cron: '51 * * * *' # Once an hour to collect a decent amount of data over the next ~12 hours
+    - cron: '18,38,58 * * * *'
 # Don't forget to disable the line above!!
 
 env:
