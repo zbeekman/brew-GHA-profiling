@@ -41,14 +41,16 @@ jobs:
           printf '| __repo__ | %s |\n' "[${GITHUB_REPOSITORY}](https://github.com/${GITHUB_REPOSITORY})" >> $DOC
           h 3 'General configuration information'
           time brew info 2>&1 >> $DOC || true
+          system_profiler SPHardwareDataType | code
+          twocol
+          printf '|   cores | %s |\n' "$(sysctl -n hw.logicalcpu)"
+          printf '| threads | %s |\n' "$(sysctl -n hw.physicalcpu)"
           time h 4 '`brew config`'
           twocol
           brew config 2>&1   | sed -e 's/^/| /'     -e 's/: / | /' -e 's/$/ |/' >> $DOC
           brew --repo 2>&1   | sed -e    's/^/| HOMEBREW_REPO | /' -e 's/$/ |/' >> $DOC
           brew --cellar 2>&1 | sed -e  's/^/| HOMEBREW_CELLAR | /' -e 's/$/ |/' >> $DOC
           brew --cache 2>&1  | sed -e   's/^/| HOMEBREW_CACHE | /' -e 's/$/ |/' >> $DOC
-          h 4 '`brew doctor`'
-          time brew doctor | code || true
           h 4 'Variables set in environment'
           twocol
           env | grep BREW | sed 's/=/ | /' >> $DOC || true
@@ -61,6 +63,8 @@ jobs:
           h 3 'Installed packages'
           h 4 'homebrew-core'
           time brew list --versions 2>&1 | to_list || true
+          h 4 '`brew doctor`'
+          time brew doctor | code || true
           h 4 'homebrew-cask'
           time brew cask list --versions 2>&1 | to_list || true
           h 4 '`brew cask doctor`'
