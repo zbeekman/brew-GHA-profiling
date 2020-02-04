@@ -139,7 +139,7 @@ jobs:
           cd gh-pages
           git status || true
           git diff
-          git add ${DOC}
+          git add README.md
           git add *.csv
           git commit -m "Adding timing data for $PACKAGES [$CONFIG]"
           git push origin gh-pages
