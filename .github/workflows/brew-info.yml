@@ -22,11 +22,6 @@ jobs:
         run: |
           [[ ${{ github.event_name }} = *schedule* ]] && sleep $(( RANDOM % 120 )) || true
           . .github/workflows/helper-fns.sh
-          type -a code
-          type -a twocol
-          type -a h
-          mount
-          df -h
           env | grep -E -i 'te?mp' || true
           env | grep -i 'scratch' || true
           env | grep -i brew || true
@@ -43,7 +38,7 @@ jobs:
           twocol
           printf '|   cores | %s |\n' "$(sysctl -n hw.logicalcpu)"  >> $DOC
           printf '| threads | %s |\n' "$(sysctl -n hw.physicalcpu)" >> $DOC
-          time h 4 '`brew config`'
+          time h 4 'brew config'
           twocol
           brew config 2>&1   | sed -e 's/^/| /'     -e 's/: / | /' -e 's/$/ |/' >> $DOC
           brew --repo 2>&1   | sed -e    's/^/| HOMEBREW_REPO | /' -e 's/$/ |/' >> $DOC
@@ -61,11 +56,11 @@ jobs:
           h 3 'Installed packages'
           h 4 'homebrew-core'
           time brew list --versions 2>&1 | to_list || true
-          h 4 '`brew doctor`'
+          h 4 'brew doctor'
           time brew doctor | code || true
           h 4 'homebrew-cask'
           time brew cask list --versions 2>&1 | to_list || true
-          h 4 '`brew cask doctor`'
+          h 4 'brew cask doctor'
           time brew cask doctor 2>&1 | code || true
       - name: Dump on error
         if: always()
@@ -167,9 +162,6 @@ jobs:
           cd gh-pages
           git status || true
           git diff
-          ls -la
-          rm -rf .git
-          ls -la
           cd ..
       - name: Publish data
         uses: docker://peaceiris/gh-pages:v2

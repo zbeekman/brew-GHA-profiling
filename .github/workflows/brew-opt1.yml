@@ -97,10 +97,6 @@ jobs:
         with:
           ref: "gh-pages"
           path: "gh-pages"
-      - name: Get vanilla config
-        uses: actions/download-artifact@v1
-        with:
-          name: brew-config
       - name: Get timing csvs
         uses: actions/download-artifact@v1
         with:
@@ -110,11 +106,8 @@ jobs:
           ls csvs
           mv csvs/*.csv gh-pages/
           cd gh-pages
-          git status || true
+          git status
           git diff
-          ls -la
-          rm -rf .git
-          ls -la
           cd ..
       - name: Publish data
         uses: docker://peaceiris/gh-pages:v2
