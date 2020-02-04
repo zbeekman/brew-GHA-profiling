@@ -44,6 +44,7 @@ jobs:
           path: "gh-pages"
       - name: Set runner vars
         run: |
+          echo "::set-env name=OLD_HOMEBREW_CACHE::$(brew --cache)"
           echo "::set-env name=HOMEBREW_CACHE::${{ runner.temp }}/brew-cache"
           echo "::set-env name=HOMEBREW_LOGS::${{ runner.temp }}/brew-logs"
           echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
@@ -56,7 +57,12 @@ jobs:
           restore-keys: brew-cache-
       - name: Get bottles
         if: steps.cache.outputs.cache-hit != 'true'
-        run: brew fetch --deps --retry $PKG
+        run: |
+          echo "::set-env name=HOMEBREW_CACHE::${OLD_HOMEBREW_CACHE}"
+          export HOMEBREW_CACHE=${OLD_HOMEBREW_CACHE}
+          ls -ld "$(brew --cache)"
+          ls -la "$(brew --cache)"
+          brew fetch --deps --retry $PKG
       - name: Setup
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
