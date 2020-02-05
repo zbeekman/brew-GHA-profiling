@@ -2,8 +2,7 @@ name: Brew Opt EnvVar
 
 on:
   schedule:
-    - cron: '18,38,58 * * * *'
-# Don't forget to disable the line above!!
+    - cron: '28 */2 * * *'
 
 env:
   TZ: "UTC"
