@@ -24,14 +24,14 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Thu Feb  6 08:10:16 UTC 2020 |
+| __date__  | Thu Feb  6 10:10:24 UTC 2020 |
 | __commit__ | [b422c86c875a840f80b37556077978939ada28a8](https://github.com/zbeekman/brew-GHA-profiling/tree/b422c86c875a840f80b37556077978939ada28a8) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
 ### General configuration information
 
-59 kegs, 99,100 files, 1.5GB
+59 kegs, 99,023 files, 1.5GB
 
 ```
 Hardware:
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMHEJLn4YCTu
+      Serial Number (system): VMM2uunnMH2E
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -70,8 +70,8 @@ Hardware:
 | HEAD | d014d5a982bc3712179af59faae33fe777d49aef |
 | Last commit | 2 weeks ago |
 | Core tap ORIGIN | https://github.com/Homebrew/homebrew-core |
-| Core tap HEAD | a3f99229e70c970a9c3e8c1d92f477c561e06cda |
-| Core tap last commit | 2 weeks ago |
+| Core tap HEAD | 9e66b9e8d4f206e98c66bccf871263cbacdedb55 |
+| Core tap last commit | 3 days ago |
 | HOMEBREW_PREFIX | /usr/local |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
@@ -80,10 +80,10 @@ Hardware:
 | Clang | 11.0 build 1100 |
 | Git | 2.25.0 => /usr/local/bin/git |
 | Curl | 7.64.1 => /usr/bin/curl |
-| Java | 13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.9, 1.7.0_252-zulu-7.36.0.5 |
-| macOS | 10.15.2-x86_64 |
+| Java | 13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.11, 1.7.0_252-zulu-7.36.0.5 |
+| macOS | 10.15.3-x86_64 |
 | CLT | 11.3.1.0.1.1576735732 |
-| Xcode | 11.2.1 => /Applications/Xcode_11.2.1.app/Contents/Developer |
+| Xcode | 11.3.1 => /Applications/Xcode_11.3.1.app/Contents/Developer |
 | HOMEBREW_REPO | /usr/local/Homebrew |
 | HOMEBREW_CELLAR | /usr/local/Cellar |
 | HOMEBREW_CACHE | /Users/runner/Library/Caches/Homebrew |
@@ -108,11 +108,11 @@ HOMEBREW_NO_AUTO_UPDATE | 1
 | HOMEBREW_CXX | "clang\+\+" |
 | MAKEFLAGS | "-j4" |
 | CMAKE_PREFIX_PATH | "/usr/local" |
-| CMAKE_INCLUDE_PATH | "/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/libxml2:/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Headers" |
-| CMAKE_LIBRARY_PATH | "/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries" |
+| CMAKE_INCLUDE_PATH | "/Applications/Xcode_11.3.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/libxml2:/Applications/Xcode_11.3.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Headers" |
+| CMAKE_LIBRARY_PATH | "/Applications/Xcode_11.3.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries" |
 | PKG_CONFIG_LIBDIR | "/usr/lib/pkgconfig:/usr/local/Homebrew/Library/Homebrew/os/mac/pkgconfig/10.15" |
 | HOMEBREW_GIT | "git" |
-| HOMEBREW_SDKROOT | "/Applications/Xcode_11.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk" |
+| HOMEBREW_SDKROOT | "/Applications/Xcode_11.3.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk" |
 | ACLOCAL_PATH | "/usr/local/share/aclocal" |
 | PATH | "/usr/local/Homebrew/Library/Homebrew/shims/mac/super:/usr/bin:/bin:/usr/sbin:/sbin" |
 
@@ -120,16 +120,16 @@ HOMEBREW_NO_AUTO_UPDATE | 1
 
 
 ```
-homebrew/cask: unpinned, 1 command, 3512 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,629 files, 3.9MB)
+homebrew/cask: unpinned, 1 command, 3521 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,638 files, 4.0MB)
 From: https://github.com/Homebrew/homebrew-cask
 
-homebrew/cask-versions: unpinned, 160 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (208 files, 325.8KB)
+homebrew/cask-versions: unpinned, 163 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (211 files, 334KB)
 From: https://github.com/Homebrew/homebrew-cask-versions
 
-homebrew/core: unpinned, 2 commands, 4887 formulae
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,146 files, 12.8MB)
+homebrew/core: unpinned, 2 commands, 4904 formulae
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,163 files, 12.8MB)
 From: https://github.com/Homebrew/homebrew-core
 ```
 
@@ -147,17 +147,17 @@ From: https://github.com/Homebrew/homebrew-core
   * azure-cli 2.0.80
   * bats 0.4.0
   * carthage 0.34.0
-  * cmake 3.16.2
+  * cmake 3.16.3
   * curl 7.68.0
   * gdbm 1.18.1
   * gettext 0.20.1
-  * git 2.25.0
-  * git-lfs 2.9.2
+  * git 2.25.0_1
+  * git-lfs 2.10.0
   * gmp 6.1.2_2
   * gnupg 2.2.19
-  * gnutls 3.6.11.1
-  * go 1.13.6
-  * gradle 6.1
+  * gnutls 3.6.12
+  * go 1.13.7
+  * gradle 6.1.1
   * icu4c 64.2
   * jq 1.6
   * libassuan 2.5.3
@@ -168,7 +168,7 @@ From: https://github.com/Homebrew/homebrew-core
   * libidn2 2.3.0
   * libksba 1.3.5
   * libssh2 1.9.0_1
-  * libtasn1 4.15.0
+  * libtasn1 4.16.0
   * libunistring 0.9.10
   * libusb 1.0.23
   * libyaml 0.2.2
@@ -180,8 +180,8 @@ From: https://github.com/Homebrew/homebrew-core
   * oniguruma 6.9.4
   * openssl 1.0.2t
   * openssl@1.1 1.1.1d
-  * p11-kit 0.23.18.1
-  * parallel 20191222
+  * p11-kit 0.23.20
+  * parallel 20200122
   * pcre2 10.34
   * perl 5.30.1
   * pinentry 1.1.0_1
@@ -204,6 +204,7 @@ From: https://github.com/Homebrew/homebrew-core
 
 
 ```
+Your system is ready to brew.
 ```
 
 
@@ -213,7 +214,8 @@ From: https://github.com/Homebrew/homebrew-core
   * chromedriver 79.0.3945.36
   * fastlane latest
   * google-chrome 79.0.3945.130
-  * powershell 6.2.3
+  * microsoft-edge 79.0.309.71
+  * powershell 6.2.4
 
 #### brew cask doctor
 
@@ -222,11 +224,11 @@ From: https://github.com/Homebrew/homebrew-core
 ==> Homebrew Version
 2.2.4
 ==> macOS
-10.15.2
+10.15.3
 ==> SIP
 Enabled
 ==> Java
-13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.9, 1.7.0_252-zulu-7.36.0.5
+13.0.2-zulu-13.29+9, 12.0.2-zulu-12.3+11, 11.0.6-zulu-11.37+17, 1.8.0_242-zulu-8.44.0.11, 1.7.0_252-zulu-7.36.0.5
 ==> xattr issues
 <NONE>
 ==> Gatekeeper support
@@ -236,8 +238,8 @@ Enabled
 ==> Homebrew Cask Staging Location
 /usr/local/Caskroom
 ==> Homebrew Cask Taps:
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3512 casks)
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (160 casks)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3521 casks)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (163 casks)
 ==> Contents of $LOAD_PATH
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/ruby-macho-2.2.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rubocop-rspec-1.37.1/lib
@@ -382,6 +384,7 @@ brew "xctool"
 cask "chromedriver"
 cask "fastlane"
 cask "google-chrome"
+cask "microsoft-edge"
 cask "powershell"
 ```
 
