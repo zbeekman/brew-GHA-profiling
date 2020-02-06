@@ -24,7 +24,7 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Thu Feb  6 12:10:18 UTC 2020 |
+| __date__  | Thu Feb  6 14:10:26 UTC 2020 |
 | __commit__ | [b422c86c875a840f80b37556077978939ada28a8](https://github.com/zbeekman/brew-GHA-profiling/tree/b422c86c875a840f80b37556077978939ada28a8) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMM6Mkr+HEV4
+      Serial Number (system): VMP9pmWrMtNM
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -71,7 +71,7 @@ Hardware:
 | Last commit | 2 weeks ago |
 | Core tap ORIGIN | https://github.com/Homebrew/homebrew-core |
 | Core tap HEAD | 9e66b9e8d4f206e98c66bccf871263cbacdedb55 |
-| Core tap last commit | 3 days ago |
+| Core tap last commit | 4 days ago |
 | HOMEBREW_PREFIX | /usr/local |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
