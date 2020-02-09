@@ -102,6 +102,7 @@ jobs:
               dot -V
               ;;
           esac
+          brew linkage $PKG
       - name: Upload log on failure
         if: always()
         uses: actions/upload-artifact@v1
