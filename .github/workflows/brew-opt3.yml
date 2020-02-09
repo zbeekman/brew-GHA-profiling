@@ -78,6 +78,7 @@ jobs:
           done
           toc=$(date '+%s')
           echo "Elapsed time for copy: $(( toc - tic ))"
+          time=$(( toc - tic ))
           ls -ld "${CELLAR_CACHE}"
           ls -la "${CELLAR_CACHE}"
           if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
