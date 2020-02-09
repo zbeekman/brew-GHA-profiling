@@ -1,8 +1,8 @@
 name: Brew Opt Cellar Cache
 
-on:
-  push:
-    branches: master
+on: [push]
+  # push:
+  #   branches: master
   # Caching not supported for cron jobs at this time
 
 env:
