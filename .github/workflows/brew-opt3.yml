@@ -80,12 +80,18 @@ jobs:
       - name: Time-it
         shell: bash
         run: |
+          echo "here 1"
           if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
+            echo "in if"
             printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
+            echo "after header"
           fi
           pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          echo "after version extraction"
           pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
-          time=($(/usr/bin/time -p brew upgrade "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          echo "after revision extraction"
+          time=($(/usr/bin/time -p brew install "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          echo "after timing"
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
       - name: Upload log on failure
         if: always()
