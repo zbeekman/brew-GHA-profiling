@@ -49,8 +49,7 @@ jobs:
         id: cache
         with:
           path: ${{ env.CELLAR_CACHE }}
-          key: brew-cellar-cache-
-          restore-keys: brew-cellar-cache-
+          key: brew-cellar-cache-${PKG}
       - name: Install into cache
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
@@ -70,11 +69,15 @@ jobs:
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
           cp gh-pages/*.csv ${DATA_DIR}/
           mkdir logs || true
+          tic=$(date '+%s')
           for d in "${CELLAR_CACHE}/"* ; do
             if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
               cp -r "${CELLAR_CACHE}/${d##*/}" "$(brew --cellar)/"
+              brew link "${d##*/}" || true
             fi
           done
+          toc=$(date '+%s')
+          echo "Elapsed time for copy: $(( toc - tic ))"
           ls -ld "${CELLAR_CACHE}"
           ls -la "${CELLAR_CACHE}"
       - name: Time-it
@@ -91,7 +94,6 @@ jobs:
             echo "$(( i++ )): $it"
           done
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
-          brew link $PKG || true
           type -a mpiexec
       - name: Upload log on failure
         if: always()
