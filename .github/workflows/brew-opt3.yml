@@ -68,14 +68,14 @@ jobs:
           done
           toc=$(date '+%s')
           echo "Elapsed time for copy: $(( toc - tic ))"
-      - name: Setup and Time-it
-        shell: bash
-        run: |
-          DEPS=($(brew deps ${PKG}))
           for p in "${PKG}" "${DEPS[@]}" ; do
             brew unlink "${p}"
             rm -rf "$(brew --cellar)/${p}"
           done
+      - name: Setup and Time-it
+        shell: bash
+        run: |
+          DEPS=($(brew deps ${PKG}))
           tic=$(date '+%s')
           for d in "${CELLAR_CACHE}/"* ; do
             if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
