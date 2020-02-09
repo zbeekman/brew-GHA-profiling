@@ -24,8 +24,8 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Sun Feb  9 02:10:44 UTC 2020 |
-| __commit__ | [58761478ad70100c25cffeecda73ab84ba60f939](https://github.com/zbeekman/brew-GHA-profiling/tree/58761478ad70100c25cffeecda73ab84ba60f939) |
+| __date__  | Sun Feb  9 04:10:54 UTC 2020 |
+| __commit__ | [4b3a8518e1b1fda3ec6ac4b7eef1c8a6231acbcf](https://github.com/zbeekman/brew-GHA-profiling/tree/4b3a8518e1b1fda3ec6ac4b7eef1c8a6231acbcf) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMhOSGtKKnTL
+      Serial Number (system): VM8OybohrANQ
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
