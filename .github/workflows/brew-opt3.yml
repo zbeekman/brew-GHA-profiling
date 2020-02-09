@@ -77,10 +77,14 @@ jobs:
           done
           ls -ld "${CELLAR_CACHE}"
           ls -la "${CELLAR_CACHE}"
+          printf 'done with setup'
       - name: Time-it
         shell: bash
         run: |
           echo "here 1"
+          echo "${DATA_DIR}/${PKG}-${CONFIG}.csv"
+          ls -ld ${DATA_DIR}/${PKG}-${CONFIG}.csv || true
+          [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] || echo 'data file missing'
           if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
             echo "in if"
             printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
