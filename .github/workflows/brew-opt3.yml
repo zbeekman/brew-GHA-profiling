@@ -81,11 +81,16 @@ jobs:
         shell: bash
         run: |
           if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
+            echo "here 1"
             printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
           fi
+          echo "here 2"
           pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          echo "here 3"
           pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
-          time=($(/usr/bin/time -p brew upgrade "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log)))
+          echo "here 4"
+          time=($(/usr/bin/time -p brew upgrade "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log) || true))
+          echo "here 5"
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
       - name: Upload log on failure
         if: always()
