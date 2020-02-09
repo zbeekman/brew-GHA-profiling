@@ -73,6 +73,7 @@ jobs:
         run: |
           DEPS=($(brew deps ${PKG}))
           for p in "${PKG}" "${DEPS[@]}" ; do
+            brew unlink "${p}"
             rm -rf "$(brew --cellar)/${p}"
           done
           tic=$(date '+%s')
@@ -105,12 +106,6 @@ jobs:
               ;;
           esac
           brew linkage $PKG
-      - name: Upload log on failure
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          path: logs
-          name: brew-install-logs
       - name: Upload CSV
         uses: actions/upload-artifact@v1
         with:
