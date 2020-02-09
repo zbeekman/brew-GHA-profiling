@@ -72,7 +72,7 @@ jobs:
           mkdir logs || true
           for d in "${CELLAR_CACHE}/"* ; do
             if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
-              ln -s "${CELLAR_CACHE}/${d##*/}" "$(brew --cellar)/${d##*/}"
+              cp -r "${CELLAR_CACHE}/${d##*/}" "$(brew --cellar)/"
             fi
           done
           ls -ld "${CELLAR_CACHE}"
@@ -91,6 +91,7 @@ jobs:
             echo "$(( i++ )): $it"
           done
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          brew link $PKG || true
           type -a mpiexec
       - name: Upload log on failure
         if: always()
