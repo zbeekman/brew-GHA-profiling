@@ -55,6 +55,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p ${CELLAR_CACHE} ${HOMEBREW_LOGS} ${HOMEBREW_TEMP} || true
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          cp gh-pages/*.csv ${DATA_DIR}/
+          mkdir logs || true
           brew install $PKG
           DEPS=($(brew deps ${PKG}))
           tic=$(date '+%s')
@@ -66,9 +69,10 @@ jobs:
       - name: Setup and Time-it
         shell: bash
         run: |
-          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
-          cp gh-pages/*.csv ${DATA_DIR}/
-          mkdir logs || true
+          DEPS=($(brew deps ${PKG}))
+          for p in "${PKG}" "${DEPS[@]}" ; do
+            rm -rf "$(brew --cellar)/${p}"
+          done
           tic=$(date '+%s')
           for d in "${CELLAR_CACHE}/"* ; do
             if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
@@ -87,9 +91,17 @@ jobs:
           pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
           pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
           printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
-          if [[ $PKG = open-mpi ]] ; then
-            mpiexec --version
-          fi
+          case $PKG in
+            open-mpi)
+              mpiexec --version
+              ;;
+            gcc@8)
+              gcc-8 --version
+              ;;
+            graphviz)
+              dot -V
+              ;;
+          esac
       - name: Upload log on failure
         if: always()
         uses: actions/upload-artifact@v1
