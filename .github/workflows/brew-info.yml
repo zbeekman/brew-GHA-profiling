@@ -1,10 +1,10 @@
 name: Brew Info
 
 on:
-  push:
-    branches: master
   schedule:
     - cron: '8 */2 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
+#  push:
+#    branches: master
 
 env:
   DOC: "index.md"
