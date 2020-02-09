@@ -54,13 +54,13 @@ jobs:
           path: ${{ env.HOMEBREW_CACHE }}
           key: brew-cellar-cache-
           restore-keys: brew-cellar-cache-
-      - name: Get bottles
+      - name: Install into cache
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           echo "::set-env name=HOMEBREW_CACHE::${OLD_HOMEBREW_CACHE}"
           export HOMEBREW_CACHE=${OLD_HOMEBREW_CACHE}
-          mkdir -p "${HOMEBREW_CELLER}" || true
+          mkdir -p "${HOMEBREW_CELLAR}" || true
           ls -ld "$(brew --cache)"
           ls -la "$(brew --cache)"
           ls -ld "$(brew --cellar)"
