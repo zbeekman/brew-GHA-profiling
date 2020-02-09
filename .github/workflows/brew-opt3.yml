@@ -3,6 +3,8 @@ name: Brew Opt Cellar Cache
 on:
   push:
     branches: master
+  schedule:
+    - cron: '2 */2 * * *'
   # Caching not supported for cron jobs at this time
 
 env:
