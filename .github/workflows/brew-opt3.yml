@@ -72,7 +72,7 @@ jobs:
           mkdir logs || true
           for d in "${CELLAR_CACHE}/"* ; do
             if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
-              ln -s "${d}" "${OLD_HOMEBREW_CELLAR}/${d##*/}"
+              ln -s "${CELLAR_CACHE}/${d##*/}" "$(brew --cellar)/${d##*/}"
             fi
           done
           ls -ld "${CELLAR_CACHE}"
