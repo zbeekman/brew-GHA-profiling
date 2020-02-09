@@ -63,7 +63,7 @@ jobs:
           done
           toc=$(date '+%s')
           echo "Elapsed time for copy: $(( toc - tic ))"
-      - name: Setup
+      - name: Setup and Time-it
         shell: bash
         run: |
           [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
@@ -80,21 +80,15 @@ jobs:
           echo "Elapsed time for copy: $(( toc - tic ))"
           ls -ld "${CELLAR_CACHE}"
           ls -la "${CELLAR_CACHE}"
-      - name: Time-it
-        shell: bash
-        run: |
           if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
             printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
           fi
           pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
           pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
-          time=($(/usr/bin/time -p brew upgrade "${PKG}" 3>&2 2>&1 1>&3 1> >(tee logs/brew-install-${PKG}.log))) || true
-          i=1
-          for it in "${time[@]}" ; do
-            echo "$(( i++ )): $it"
-          done
-          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time[1]}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
-          type -a mpiexec
+          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          if [[ $PKG = open-mpi ]] ; then
+            mpiexec --version
+          fi
       - name: Upload log on failure
         if: always()
         uses: actions/upload-artifact@v1
