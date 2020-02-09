@@ -60,7 +60,7 @@ jobs:
           DEPS=($(brew deps ${PKG}))
           tic=$(date '+%s')
           for p in "${PKG}" "${DEPS[@]}" ; do
-            cp -r "${p}" "${CELLAR_CACHE}"
+            cp -r "$(brew --cellar)/${p}" "${CELLAR_CACHE}"
           done
           toc=$(date '+%s')
           echo "Elapsed time for copy: $(( toc - tic ))"
