@@ -24,14 +24,14 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Thu Feb 13 06:09:37 UTC 2020 |
+| __date__  | Thu Feb 13 08:10:57 UTC 2020 |
 | __commit__ | [23929659c03e7ffbde3f3babb9b616d2766ef70d](https://github.com/zbeekman/brew-GHA-profiling/tree/23929659c03e7ffbde3f3babb9b616d2766ef70d) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
 ### General configuration information
 
-59 kegs, 99,023 files, 1.5GB
+96 kegs, 115,572 files, 6.6GB
 
 ```
 Hardware:
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMz9Ml75GXoC
+      Serial Number (system): VMVthi+rKGmA
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -65,13 +65,13 @@ Hardware:
 
 | `key` | `value` |
 | ---: | --- |
-| HOMEBREW_VERSION | 2.2.4 |
+| HOMEBREW_VERSION | 2.2.5 |
 | ORIGIN | https://github.com/Homebrew/brew |
-| HEAD | d014d5a982bc3712179af59faae33fe777d49aef |
-| Last commit | 3 weeks ago |
+| HEAD | 4493f27db28be7f083737424cecd8edb863ec3f6 |
+| Last commit | 11 days ago |
 | Core tap ORIGIN | https://github.com/Homebrew/homebrew-core |
-| Core tap HEAD | 9e66b9e8d4f206e98c66bccf871263cbacdedb55 |
-| Core tap last commit | 10 days ago |
+| Core tap HEAD | 1252f760fe029bcafb6025bd4b3835a8dfe00264 |
+| Core tap last commit | 5 days ago |
 | HOMEBREW_PREFIX | /usr/local |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
@@ -120,16 +120,16 @@ HOMEBREW_NO_AUTO_UPDATE | 1
 
 
 ```
-homebrew/cask: unpinned, 1 command, 3521 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,638 files, 4.0MB)
+homebrew/cask: unpinned, 1 command, 3526 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,642 files, 201.8MB)
 From: https://github.com/Homebrew/homebrew-cask
 
 homebrew/cask-versions: unpinned, 163 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (211 files, 334KB)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (211 files, 333.9KB)
 From: https://github.com/Homebrew/homebrew-cask-versions
 
-homebrew/core: unpinned, 2 commands, 4904 formulae
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,163 files, 12.8MB)
+homebrew/core: unpinned, 4910 formulae
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,169 files, 12.8MB)
 From: https://github.com/Homebrew/homebrew-core
 ```
 
@@ -143,59 +143,96 @@ From: https://github.com/Homebrew/homebrew-core
   * adns 1.5.1
   * apr 1.7.0
   * apr-util 1.6.1_3
+  * argon2 20190702_1
   * aria2 1.35.0
-  * azure-cli 2.0.80
+  * aspell 0.60.8
+  * autoconf 2.69
+  * azure-cli 2.0.81
   * bats 0.4.0
+  * brotli 1.0.7
+  * c-ares 1.15.0
   * carthage 0.34.0
   * cmake 3.16.3
   * curl 7.68.0
+  * curl-openssl 7.68.0
+  * freetds 1.1.24
+  * freetype 2.10.1
+  * gcc 9.2.0_3
+  * gcc@8 8.3.0_2
   * gdbm 1.18.1
   * gettext 0.20.1
   * git 2.25.0_1
   * git-lfs 2.10.0
+  * glib 2.62.4
   * gmp 6.1.2_2
   * gnupg 2.2.19
   * gnutls 3.6.12
   * go 1.13.7
-  * gradle 6.1.1
+  * gradle 6.1.1_1
   * icu4c 64.2
+  * isl 0.22
+  * jansson 2.12
+  * jemalloc 5.2.1
+  * jpeg 9d
   * jq 1.6
   * libassuan 2.5.3
+  * libev 4.31
   * libevent 2.1.11_1
   * libffi 3.2.1
   * libgcrypt 1.8.5
   * libgpg-error 1.36
+  * libidn 1.35
   * libidn2 2.3.0
   * libksba 1.3.5
+  * libmetalink 0.1.3
+  * libmpc 1.1.0
+  * libpng 1.6.37
+  * libpq 12.1_1
+  * libsodium 1.0.18_1
   * libssh2 1.9.0_1
   * libtasn1 4.16.0
+  * libtiff 4.1.0
+  * libtool 2.4.6_1
   * libunistring 0.9.10
   * libusb 1.0.23
   * libyaml 0.2.2
+  * libzip 1.6.1
+  * llvm 9.0.1
   * lz4 1.9.2
-  * maven 3.6.3
+  * maven 3.6.3_1
+  * mpfr 4.0.2
   * nettle 3.4.1
-  * node@12 12.14.1_1
+  * nghttp2 1.40.0
+  * node@12 12.15.0
   * npth 1.6
   * oniguruma 6.9.4
+  * openjdk 13.0.2+8_2
+  * openldap 2.4.49
   * openssl 1.0.2t
   * openssl@1.1 1.1.1d
   * p11-kit 0.23.20
   * parallel 20200122
+  * pcre 8.43
   * pcre2 10.34
   * perl 5.30.1
+  * php 7.4.2
   * pinentry 1.1.0_1
   * python 3.7.6_1
   * python@2 2.7.17_1
   * python@3.8 3.8.1
   * readline 8.0.1
+  * rtmpdump 2.4+20151223_1
   * ruby 2.6.5
   * rustup-init 1.21.1
   * selenium-server-standalone 3.141.59
-  * sqlite 3.30.1
-  * subversion 1.13.0_1
+  * sqlite 3.31.1
+  * subversion 1.13.0_2
+  * swig 4.0.1
+  * tidy-html5 5.6.0
   * unbound 1.9.6
+  * unixodbc 2.3.7
   * utf8proc 2.4.0
+  * webp 1.1.0
   * wget 1.20.3_2
   * xctool 0.3.7
   * xz 5.2.4
@@ -211,10 +248,10 @@ Your system is ready to brew.
 #### homebrew-cask
 
 
-  * chromedriver 79.0.3945.36
+  * chromedriver 80.0.3987.16
   * fastlane latest
-  * google-chrome 79.0.3945.130
-  * microsoft-edge 79.0.309.71
+  * google-chrome 80.0.3987.87
+  * microsoft-edge 80.0.361.48
   * powershell 6.2.4
 
 #### brew cask doctor
@@ -222,7 +259,7 @@ Your system is ready to brew.
 
 ```
 ==> Homebrew Version
-2.2.4
+2.2.5
 ==> macOS
 10.15.3
 ==> SIP
@@ -238,7 +275,7 @@ Enabled
 ==> Homebrew Cask Staging Location
 /usr/local/Caskroom
 ==> Homebrew Cask Taps:
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3521 casks)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3526 casks)
 /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (163 casks)
 ==> Contents of $LOAD_PATH
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/ruby-macho-2.2.0/lib
@@ -345,10 +382,16 @@ brew "carthage"
 brew "cmake"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# GNU compiler collection
+brew "gcc"
+# GNU compiler collection
+brew "gcc@8"
 # Distributed revision control system
 brew "git"
 # Git extension for versioning large files
 brew "git-lfs"
+# Interpreted, interactive, object-oriented programming language
+brew "python"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -357,6 +400,10 @@ brew "go"
 brew "gradle"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Postgres C API library
+brew "libpq"
+# Next-gen compiler infrastructure
+brew "llvm"
 # Mac App Store command-line interface
 brew "mas"
 # Java-based project management
@@ -365,8 +412,8 @@ brew "maven"
 brew "node@12", link: true
 # Shell command parallelization utility
 brew "parallel"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
+# General-purpose scripting language
+brew "php"
 # Interpreted, interactive, object-oriented programming language
 brew "python@2"
 # Powerful, clean, object-oriented scripting language
