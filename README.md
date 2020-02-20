@@ -24,14 +24,14 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Thu Feb 20 10:10:19 UTC 2020 |
+| __date__  | Thu Feb 20 12:10:59 UTC 2020 |
 | __commit__ | [23929659c03e7ffbde3f3babb9b616d2766ef70d](https://github.com/zbeekman/brew-GHA-profiling/tree/23929659c03e7ffbde3f3babb9b616d2766ef70d) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
 
 ### General configuration information
 
-96 kegs, 115,572 files, 6.6GB
+97 kegs, 116,646 files, 6.6GB
 
 ```
 Hardware:
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMXboCqMyKDp
+      Serial Number (system): VMVgJhPkXpx1
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -65,13 +65,13 @@ Hardware:
 
 | `key` | `value` |
 | ---: | --- |
-| HOMEBREW_VERSION | 2.2.5 |
+| HOMEBREW_VERSION | 2.2.6 |
 | ORIGIN | https://github.com/Homebrew/brew |
-| HEAD | 4493f27db28be7f083737424cecd8edb863ec3f6 |
-| Last commit | 3 weeks ago |
+| HEAD | 27fa87c94a6cf7be40fc8f8fc96bc7c387b7781e |
+| Last commit | 3 days ago |
 | Core tap ORIGIN | https://github.com/Homebrew/homebrew-core |
-| Core tap HEAD | 1252f760fe029bcafb6025bd4b3835a8dfe00264 |
-| Core tap last commit | 12 days ago |
+| Core tap HEAD | 0aba2b8d1e53b95afda1491d4c2fa2426c23f003 |
+| Core tap last commit | 2 days ago |
 | HOMEBREW_PREFIX | /usr/local |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
@@ -120,16 +120,16 @@ HOMEBREW_NO_AUTO_UPDATE | 1
 
 
 ```
-homebrew/cask: unpinned, 1 command, 3526 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,642 files, 201.8MB)
+homebrew/cask: unpinned, 1 command, 3536 casks
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3,652 files, 202.5MB)
 From: https://github.com/Homebrew/homebrew-cask
 
 homebrew/cask-versions: unpinned, 163 casks
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (211 files, 333.9KB)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (210 files, 64.2MB)
 From: https://github.com/Homebrew/homebrew-cask-versions
 
-homebrew/core: unpinned, 4910 formulae
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,169 files, 12.8MB)
+homebrew/core: unpinned, 4915 formulae
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core (5,172 files, 304.0MB)
 From: https://github.com/Homebrew/homebrew-core
 ```
 
@@ -152,7 +152,7 @@ From: https://github.com/Homebrew/homebrew-core
   * brotli 1.0.7
   * c-ares 1.15.0
   * carthage 0.34.0
-  * cmake 3.16.3
+  * cmake 3.16.4
   * curl 7.68.0
   * curl-openssl 7.68.0
   * freetds 1.1.24
@@ -160,6 +160,7 @@ From: https://github.com/Homebrew/homebrew-core
   * gcc 9.2.0_3
   * gcc@8 8.3.0_2
   * gdbm 1.18.1
+  * geckodriver 0.26.0
   * gettext 0.20.1
   * git 2.25.0_1
   * git-lfs 2.10.0
@@ -167,8 +168,8 @@ From: https://github.com/Homebrew/homebrew-core
   * gmp 6.1.2_2
   * gnupg 2.2.19
   * gnutls 3.6.12
-  * go 1.13.7
-  * gradle 6.1.1_1
+  * go 1.13.8
+  * gradle 6.2
   * icu4c 64.2
   * isl 0.22
   * jansson 2.12
@@ -180,7 +181,7 @@ From: https://github.com/Homebrew/homebrew-core
   * libevent 2.1.11_1
   * libffi 3.2.1
   * libgcrypt 1.8.5
-  * libgpg-error 1.36
+  * libgpg-error 1.37
   * libidn 1.35
   * libidn2 2.3.0
   * libksba 1.3.5
@@ -203,7 +204,7 @@ From: https://github.com/Homebrew/homebrew-core
   * mpfr 4.0.2
   * nettle 3.4.1
   * nghttp2 1.40.0
-  * node@12 12.15.0
+  * node@12 12.16.0
   * npth 1.6
   * oniguruma 6.9.4
   * openjdk 13.0.2+8_2
@@ -212,7 +213,7 @@ From: https://github.com/Homebrew/homebrew-core
   * openssl@1.1 1.1.1d
   * p11-kit 0.23.20
   * parallel 20200122
-  * pcre 8.43
+  * pcre 8.44
   * pcre2 10.34
   * perl 5.30.1
   * php 7.4.2
@@ -222,7 +223,7 @@ From: https://github.com/Homebrew/homebrew-core
   * python@3.8 3.8.1
   * readline 8.0.1
   * rtmpdump 2.4+20151223_1
-  * ruby 2.6.5
+  * ruby 2.7.0
   * rustup-init 1.21.1
   * selenium-server-standalone 3.141.59
   * sqlite 3.31.1
@@ -248,10 +249,13 @@ Your system is ready to brew.
 #### homebrew-cask
 
 
-  * chromedriver 80.0.3987.16
+  * 2020-02-20 12:12:19.892 defaults[2984:15140]
+  * The domain/default pair of (kCFPreferencesAnyApplication, AppleLanguages) does not exist
+  * chromedriver 80.0.3987.106
   * fastlane latest
-  * google-chrome 80.0.3987.87
-  * microsoft-edge 80.0.361.48
+  * firefox 73.0
+  * google-chrome 80.0.3987.106
+  * microsoft-edge 80.0.361.54
   * powershell 6.2.4
 
 #### brew cask doctor
@@ -259,7 +263,7 @@ Your system is ready to brew.
 
 ```
 ==> Homebrew Version
-2.2.5
+2.2.6
 ==> macOS
 10.15.3
 ==> SIP
@@ -275,14 +279,14 @@ Enabled
 ==> Homebrew Cask Staging Location
 /usr/local/Caskroom
 ==> Homebrew Cask Taps:
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3526 casks)
+/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask (3536 casks)
 /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-versions (163 casks)
 ==> Contents of $LOAD_PATH
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/ruby-macho-2.2.0/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rubocop-rspec-1.37.1/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rubocop-rspec-1.38.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rubocop-performance-1.5.2/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rubocop-0.79.0/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/unicode-display_width-1.6.0/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/unicode-display_width-1.6.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/ruby-progressbar-1.10.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rspec-wait-0.0.9/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rspec-retry-0.6.2/lib
@@ -298,14 +302,14 @@ Enabled
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/rainbow-3.0.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/plist-3.5.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/parser-2.7.0.2/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/parallel_tests-2.30.0/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/parallel_tests-2.31.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/parallel-1.19.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/mustache-1.1.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/mechanize-2.7.6/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/webrobots-0.1.2/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/ntlm-http-0.1.1/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/nokogiri-1.10.7/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/extensions/universal-darwin-19/2.6.0/nokogiri-1.10.7
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/nokogiri-1.10.8/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/extensions/universal-darwin-19/2.6.0/nokogiri-1.10.8
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/mini_portile2-2.4.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/net-http-persistent-3.1.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/net-http-digest_auth-1.4.1/lib
@@ -324,7 +328,7 @@ Enabled
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/coveralls-0.8.23/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/thor-1.0.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/term-ansicolor-1.7.1/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/tins-1.24.0/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/tins-1.24.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../../../../../../../../Library/Ruby/Gems/2.6.0/gems/sync-0.5.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/simplecov-0.16.1/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/simplecov-html-0.10.2/lib
@@ -338,9 +342,9 @@ Enabled
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/zeitwerk-2.2.2/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/tzinfo-1.2.6/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/thread_safe-0.3.6/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/minitest-5.13.0/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/minitest-5.14.0/lib
 /usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/i18n-1.8.2/lib
-/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/concurrent-ruby-1.1.5/lib
+/usr/local/Homebrew/Library/Homebrew/vendor/bundle/bundler/../ruby/2.6.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby
 /Library/Ruby/Site/2.6.0
 /Library/Ruby/Site/2.6.0/x86_64-darwin19
 /Library/Ruby/Site/2.6.0/universal-darwin19
@@ -386,6 +390,8 @@ brew "curl"
 brew "gcc"
 # GNU compiler collection
 brew "gcc@8"
+# WebDriver <-> Marionette proxy
+brew "geckodriver"
 # Distributed revision control system
 brew "git"
 # Git extension for versioning large files
@@ -430,6 +436,7 @@ brew "wget"
 brew "xctool"
 cask "chromedriver"
 cask "fastlane"
+cask "firefox"
 cask "google-chrome"
 cask "microsoft-edge"
 cask "powershell"
