@@ -24,7 +24,7 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Thu Feb 20 16:09:41 UTC 2020 |
+| __date__  | Thu Feb 20 18:10:54 UTC 2020 |
 | __commit__ | [23929659c03e7ffbde3f3babb9b616d2766ef70d](https://github.com/zbeekman/brew-GHA-profiling/tree/23929659c03e7ffbde3f3babb9b616d2766ef70d) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMo7tqfJkVKK
+      Serial Number (system): VMjdhb4yu07/
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -249,7 +249,7 @@ Your system is ready to brew.
 #### homebrew-cask
 
 
-  * 2020-02-20 16:10:54.728 defaults[3094:16460]
+  * 2020-02-20 18:12:07.130 defaults[3128:18194]
   * The domain/default pair of (kCFPreferencesAnyApplication, AppleLanguages) does not exist
   * chromedriver 80.0.3987.106
   * fastlane latest
