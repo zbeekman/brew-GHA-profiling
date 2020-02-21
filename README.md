@@ -24,7 +24,7 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Fri Feb 21 02:10:07 UTC 2020 |
+| __date__  | Fri Feb 21 04:09:55 UTC 2020 |
 | __commit__ | [23929659c03e7ffbde3f3babb9b616d2766ef70d](https://github.com/zbeekman/brew-GHA-profiling/tree/23929659c03e7ffbde3f3babb9b616d2766ef70d) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
@@ -249,7 +249,7 @@ Your system is ready to brew.
 #### homebrew-cask
 
 
-  * 2020-02-21 02:11:19.857 defaults[3069:17984]
+  * 2020-02-21 04:11:06.087 defaults[3092:18449]
   * The domain/default pair of (kCFPreferencesAnyApplication, AppleLanguages) does not exist
   * chromedriver 80.0.3987.106
   * fastlane latest
