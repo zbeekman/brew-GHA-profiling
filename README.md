@@ -24,7 +24,7 @@ The three CSV files with timing data are:
 
 | `key` | `value` |
 | ---: | --- |
-| __date__  | Sat Feb 22 14:09:52 UTC 2020 |
+| __date__  | Sat Feb 22 16:10:34 UTC 2020 |
 | __commit__ | [23929659c03e7ffbde3f3babb9b616d2766ef70d](https://github.com/zbeekman/brew-GHA-profiling/tree/23929659c03e7ffbde3f3babb9b616d2766ef70d) |
 | __branch__ | [master](https://github.com/zbeekman/brew-GHA-profiling/tree/master) |
 | __repo__ | [zbeekman/brew-GHA-profiling](https://github.com/zbeekman/brew-GHA-profiling) |
@@ -49,7 +49,7 @@ Hardware:
       Boot ROM Version: VMW71.00V.13989454.B64.1906190538
       Apple ROM Info: [MS_VM_CERT/SHA1/27d66596a61c48dd3dc7216fd715126e33f59ae7]Welcome to the Virtual Machine
       SMC Version (system): 2.8f0
-      Serial Number (system): VMqonTRWoFA6
+      Serial Number (system): VMjo+PNJAe91
       Hardware UUID: 4203018E-580F-C1B5-9525-B745CECA79EB
 
 ```
@@ -71,7 +71,7 @@ Hardware:
 | Last commit | 5 days ago |
 | Core tap ORIGIN | https://github.com/Homebrew/homebrew-core |
 | Core tap HEAD | 0aba2b8d1e53b95afda1491d4c2fa2426c23f003 |
-| Core tap last commit | 4 days ago |
+| Core tap last commit | 5 days ago |
 | HOMEBREW_PREFIX | /usr/local |
 | HOMEBREW_NO_ANALYTICS_THIS_RUN | 1 |
 | HOMEBREW_NO_AUTO_UPDATE | 1 |
@@ -249,7 +249,7 @@ Your system is ready to brew.
 #### homebrew-cask
 
 
-  * 2020-02-22 14:11:02.584 defaults[3188:19042]
+  * 2020-02-22 16:11:42.967 defaults[3203:23279]
   * The domain/default pair of (kCFPreferencesAnyApplication, AppleLanguages) does not exist
   * chromedriver 80.0.3987.106
   * fastlane latest
