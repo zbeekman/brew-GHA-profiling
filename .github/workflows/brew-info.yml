@@ -1,10 +1,10 @@
 name: Brew Info
 
 on:
-  push:
-    branches: master
   schedule:
-    - cron: '8 6 * * 6-7'
+    - cron: '8 */2 * * 6-7' # Just before 7PM west-coast and morning, just before 1:00 AM Eastern, saturday and sunday
+#  push:
+#    branches: master
 
 env:
   DOC: "index.md"
@@ -69,8 +69,9 @@ jobs:
         run: cat ${DOC}
       - name: Dump bundle
         run: |
+          export HOMEBREW_DISPLAY_INSTALL_TIMES="ON"
           brew install mas || true
-          brew tap homebrew/bundle || true
+          time brew tap homebrew/bundle || true
           brew bundle dump --force --describe --file=GHA-default-Brewfile.txt || true
           if [ -f GHA-default-Brewfile.txt ]; then
             . .github/workflows/helper-fns.sh

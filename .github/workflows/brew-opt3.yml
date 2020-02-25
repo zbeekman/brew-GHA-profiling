@@ -1,0 +1,149 @@
+name: Brew Opt Cellar Cache
+
+on:
+  push:
+    branches: master
+  schedule:
+    - cron: '2 */2 * * *'
+  # Caching not supported for cron jobs at this time
+
+env:
+  TZ: "UTC"
+  NCPU: "4"
+  CI: "ON"
+
+jobs:
+
+  Profile:
+    env:
+      CONFIG: "Cellar-Cache"
+      DATA_DIR: "gh-pages/csvs"
+      HOMEBREW_DISPLAY_INSTALL_TIMES: "ON"
+      HOMEBREW_NO_ANALYTICS: "ON"
+      HOMEBREW_NO_AUTO_UPDATE: "ON" # Already enabled in the environment
+      HOMEBREW_NO_GITHUB_API: "ON"
+      HOMEBREW_NO_INSTALL_CLEANUP: "ON"
+      HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: "ON"
+      PKG: ${{ matrix.packages }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        packages: [open-mpi, gcc@8, graphviz]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Set runner vars
+        run: |
+          echo "::set-env name=CELLAR_CACHE::${{ runner.temp }}/brew-cellar-cache"
+          echo "::set-env name=HOMEBREW_LOGS::${{ runner.temp }}/brew-logs"
+          echo "::set-env name=HOMEBREW_TEMP::${{ runner.temp }}/brew-temp"
+      - name: Restore Cache
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: ${{ env.CELLAR_CACHE }}
+          key: brew-cellar-cache-${PKG}
+      - name: Install into cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          mkdir -p ${CELLAR_CACHE} ${HOMEBREW_LOGS} ${HOMEBREW_TEMP} || true
+          [ -d ${DATA_DIR} ] || mkdir -p ${DATA_DIR}
+          cp gh-pages/*.csv ${DATA_DIR}/
+          mkdir logs || true
+          brew install $PKG
+          DEPS=($(brew deps ${PKG}))
+          tic=$(date '+%s')
+          for p in "${PKG}" "${DEPS[@]}" ; do
+            cp -r "$(brew --cellar)/${p}" "${CELLAR_CACHE}"
+          done
+          toc=$(date '+%s')
+          echo "Elapsed time for copy: $(( toc - tic ))"
+          for p in "${PKG}" "${DEPS[@]}" ; do
+            brew unlink "${p}"
+            rm -rf "$(brew --cellar)/${p}"
+          done
+      - name: Setup and Time-it
+        shell: bash
+        run: |
+          DEPS=($(brew deps ${PKG}))
+          tic=$(date '+%s')
+          for d in "${CELLAR_CACHE}/"* ; do
+            if ! [ -d "$(brew --cellar)/${d##*/}" ] ; then
+              cp -r "${CELLAR_CACHE}/${d##*/}" "$(brew --cellar)/"
+              brew link "${d##*/}" || true
+            fi
+          done
+          toc=$(date '+%s')
+          echo "Elapsed time for copy: $(( toc - tic ))"
+          time=$(( toc - tic ))
+          ls -ld "${CELLAR_CACHE}"
+          ls -la "${CELLAR_CACHE}"
+          if ! [ -f ${DATA_DIR}/${PKG}-${CONFIG}.csv ] ; then
+            printf 'package, pkg-ver, install-time, date, config\n' > ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          fi
+          pkg_version="$(brew info --json=v1 ${PKG} | jq -r '.[].versions.stable')"
+          pkg_version="${pkg_version}_$(brew info --json=v1 ${PKG} | jq '.[].revision')"
+          printf '%s, %s, %s, %s, %s\n' "$PKG" "$pkg_version" "${time}" "$(date '+%s')" "${CONFIG}" >> ${DATA_DIR}/${PKG}-${CONFIG}.csv
+          case $PKG in
+            open-mpi)
+              mpiexec --version
+              ;;
+            gcc@8)
+              gcc-8 --version
+              ;;
+            graphviz)
+              dot -V
+              ;;
+          esac
+          brew linkage $PKG
+      - name: Upload CSV
+        uses: actions/upload-artifact@v1
+        with:
+          name: csvs
+          path: ${{ env.DATA_DIR }}/${{ matrix.packages }}-${{ env.CONFIG }}.csv
+
+  Deploy:
+    needs: Profile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout Pages/Data Branch
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Get timing csvs
+        uses: actions/download-artifact@v1
+        with:
+          name: csvs
+      - name: Ready Data
+        run: |
+          ls csvs
+          mv csvs/*.csv gh-pages/
+          cd gh-pages
+          git status
+          git diff
+          cd ..
+      - name: Publish data
+        uses: docker://peaceiris/gh-pages:v2
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./gh-pages
+        with:
+          emptyCommits: true
+          keepFiles: true
+          forceOrphan: false
+          commitMessage: ${{ github.event.head_commit.message }}
+          username: ${{ github.actor }}
