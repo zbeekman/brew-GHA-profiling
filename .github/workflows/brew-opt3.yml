@@ -3,8 +3,8 @@ name: Brew Opt Cellar Cache
 on:
   push:
     branches: master
-  schedule:
-    - cron: '2 */2 * * *'
+#  schedule:
+#    - cron: '2 */2 * * *'
   # Caching not supported for cron jobs at this time
 
 env:
@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest]
-        packages: [open-mpi, gcc@8, graphviz]
+        packages: [open-mpi, graphviz]
 
     steps:
       - name: Checkout
