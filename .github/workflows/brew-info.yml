@@ -4,7 +4,7 @@ on:
   push:
     branches: master
   schedule:
-    - cron: '8 */2 * * *' # Just before 7PM west-coast and morning, just before 1:00 AM Easter
+    - cron: '8 6 * * 6-7'
 
 env:
   DOC: "index.md"
