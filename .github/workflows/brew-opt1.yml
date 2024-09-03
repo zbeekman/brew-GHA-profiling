@@ -99,7 +99,7 @@ jobs:
           ref: "gh-pages"
           path: "gh-pages"
       - name: Get timing csvs
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4.1.7
         with:
           name: csvs
       - name: Ready Data
